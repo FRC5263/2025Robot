@@ -23,4 +23,3 @@ public final class Main {
     RobotBase.startRobot(Robot::new);
   }
 }
-// Finally, I set this up with no terminal injurys. THANK YOU FRC
