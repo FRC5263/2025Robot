@@ -47,7 +47,7 @@ public class mecDrive extends RobotDriveBase implements Sendable, AutoCloseable 
 
     // Used to send out to the DoubleConsumer
     private double m_frontRightOutput;
-    private double m_backRightOutput;-+
+    private double m_backRightOutput;
     
     private double m_backLeftOutput;
     private double m_frontLeftOutput;
