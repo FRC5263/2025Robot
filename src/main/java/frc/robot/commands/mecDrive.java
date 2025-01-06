@@ -10,6 +10,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.util.sendable.SendableBuilder;
+import frc.robot.Constants;
 
 import com.revrobotics.spark.SparkMax;
 
@@ -17,14 +18,14 @@ import edu.wpi.first.wpilibj.drive.RobotDriveBase;
 
 /* shamlessly taken from WPI docs, I'm simply too lazy
  *
- * wheel config is FINAL, builders MUST do it like this (or execution):
+ * wheel config is FINAL (and also stolen from WPI), builders MUST do it like this (or execution):
  * 
  *      F
- * \_______//
- * \ |   | //
+ * \\_______//
+ * \\ |   | //
  *    |   |
- * //_|___|_\
- * //       \
+ * //_|___|_\\
+ * //       \\
  *      B
  * 
  * 
@@ -40,10 +41,10 @@ public class mecDrive extends RobotDriveBase implements Sendable, AutoCloseable 
     private final DoubleConsumer m_frontLeftMotor;
 
     // realMotorReal !!!!!!!!
-    public SparkMax frontRightMotor = new SparkMax(1, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
-    public SparkMax backRightMotor = new SparkMax(2, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
-    public SparkMax backLefttMotor = new SparkMax(3, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
-    public SparkMax frontLeftMotor = new SparkMax(4, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
+    public static SparkMax frontRightMotor = new SparkMax(Constants.frontRightID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
+    public static SparkMax backRightMotor = new SparkMax(Constants.backRightID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
+    public static SparkMax backLefttMotor = new SparkMax(Constants.frontLeftID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
+    public static SparkMax frontLeftMotor = new SparkMax(Constants.frontLeftID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
 
     // Used to send out to the DoubleConsumer
     private double m_frontRightOutput;
@@ -66,7 +67,7 @@ public class mecDrive extends RobotDriveBase implements Sendable, AutoCloseable 
         throw new UnsupportedOperationException("Unimplemented method 'getDescription'");
     }
     //-----------------------------------------------------------------------------------------------//
-    
+
     // Wheel speeds
     @SuppressWarnings("MemberName")
     public static class WheelSpeeds{
@@ -97,7 +98,7 @@ public class mecDrive extends RobotDriveBase implements Sendable, AutoCloseable 
         @Override
         public void close(){}
         // Drive method
-        // I don't know if this HAL report does anything actually or if it's for a JVM but the code doesn't work without it
+        // I don't know if this HAL report does anything actually or if it's for JVM but the code doesn't work without it
         public void driveCartesian(double xSpeed, double ySpeed, double zRoation){
             driveCartesian(xSpeed, ySpeed, zRoation, Rotation2d.kZero);
         }
