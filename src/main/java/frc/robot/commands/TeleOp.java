@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import java.lang.Math;
 
 
-public class TeleOp extends Command {
+public class TeleOp extends Command{
   public void initialize(){}
   Joystick stick1 = new Joystick(0);
 

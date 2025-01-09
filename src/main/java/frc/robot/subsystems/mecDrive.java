@@ -1,20 +1,32 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
+import frc.robot.auton.playAuton;
+import frc.robot.commands.Autos;
 import frc.robot.commands.TeleOp;
 
 import com.revrobotics.spark.SparkMax;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
 
 
 public class mecDrive extends SubsystemBase{
-    private static MotorController FRD; //= new SparkMax(Constants.frontRightID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
-    private static MotorController BRD; //= new SparkMax(Constants.backRightID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
-    private static MotorController BLD; // = new SparkMax(Constants.backLeftID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
-    private static MotorController FLD; // = new SparkMax(Constants.frontLeftID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
+
+    // Auton main points here for FRC doc reasons (this is the only way I've seen it done)
+    boolean isRecording = false;
+    boolean isAutonomous = false;
+
+    public static final int autoNumber = 1;
+
+    public static String autoFile = new String("auton" + autoNumber + ".csv");
+
+    public static MotorController FRD; //= new SparkMax(Constants.frontRightID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
+    public static MotorController BRD; //= new SparkMax(Constants.backRightID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
+    public static MotorController BLD; // = new SparkMax(Constants.backLeftID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
+    public static MotorController FLD; // = new SparkMax(Constants.frontLeftID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
     public static ADXRS450_Gyro gyro;
 
     public mecDrive(){
@@ -27,6 +39,10 @@ public class mecDrive extends SubsystemBase{
 
     public void initDefaultCommand(){
         setDefaultCommand(new TeleOp());
+    }
+
+    public Command shadowAuton(){
+        return runOnce(null);
     }
 
     public void mecanumDrive(double FR, double BR, double BL, double FL){

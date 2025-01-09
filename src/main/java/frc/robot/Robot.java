@@ -16,6 +16,11 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
+  boolean isRecording = false;
+  public static final int autoNumber = 1;
+
+  public static String autoFile = new String("auton" + autoNumber + ".csv");
+
   private final RobotContainer m_robotContainer;
 
   /**
