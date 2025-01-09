@@ -42,7 +42,7 @@ public class mecDrive extends SubsystemBase{
         double FRBLPower = translationPower * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) - Math.cos(translationAngle));
 
         // Make power consistent on turn, check to see if turning angle interferes with math
-        double turnScale = Math.max(Math.abs(FLBRPower + turnPower), Math.abs(FLBRPower = turnPower));
+        double turnScale = Math.max(Math.abs(FLBRPower + turnPower), Math.abs(FLBRPower - turnPower));
         turnScale = Math.max(turnScale, Math.max(Math.abs(FRBLPower + turnPower), Math.abs(FLBRPower - turnPower)));
 
         // Scale
