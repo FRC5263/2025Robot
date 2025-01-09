@@ -1,20 +1,88 @@
-package frc.robot.commands;
+package frc.robot.subsystems;
 
-import java.util.function.DoubleConsumer;
-
-import edu.wpi.first.hal.HAL;
-import edu.wpi.first.hal.FRCNetComm.tInstances;
-import edu.wpi.first.hal.FRCNetComm.tResourceType;
-import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.util.sendable.Sendable;
-import edu.wpi.first.util.sendable.SendableBuilder;
 import frc.robot.Constants;
+import frc.robot.commands.TeleOp;
 
 import com.revrobotics.spark.SparkMax;
+import edu.wpi.first.wpilibj.motorcontrol.MotorController;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
-import edu.wpi.first.wpilibj.drive.RobotDriveBase;
+
+
+public class mecDrive extends SubsystemBase{
+    private static MotorController FRD; //= new SparkMax(Constants.frontRightID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
+    private static MotorController BRD; //= new SparkMax(Constants.backRightID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
+    private static MotorController BLD; // = new SparkMax(Constants.backLeftID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
+    private static MotorController FLD; // = new SparkMax(Constants.frontLeftID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
+    public static ADXRS450_Gyro gyro;
+
+    public mecDrive(){
+        FRD = new SparkMax(Constants.frontRightID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
+        BRD = new SparkMax(Constants.backRightID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
+        BLD = new SparkMax(Constants.backLeftID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
+        FLD = new SparkMax(Constants.frontLeftID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
+        gyro = new ADXRS450_Gyro();
+    }
+
+    public void initDefaultCommand(){
+        setDefaultCommand(new TeleOp());
+    }
+
+    public void mecanumDrive(double FR, double BR, double BL, double FL){
+        FRD.set(FR);
+        BRD.set(BR);
+        BLD.set(BL);
+        FLD.set(FL);
+    }
+
+    public static void setSpeed(double translationAngle, double translationPower, double turnPower){
+        // Motor power math, shamelessly stolen from 6624's implamentation because I don't know circles
+        double FLBRPower = translationPower * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) + Math.cos(translationAngle));
+        double FRBLPower = translationPower * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) - Math.cos(translationAngle));
+
+        // Make power consistent on turn, check to see if turning angle interferes with math
+        double turnScale = Math.max(Math.abs(FLBRPower + turnPower), Math.abs(FLBRPower = turnPower));
+        turnScale = Math.max(turnScale, Math.max(Math.abs(FRBLPower + turnPower), Math.abs(FLBRPower - turnPower)));
+
+        // Scale
+        if(Math.abs(turnScale) < 1.0){
+            turnScale = 1.0;
+        }
+
+
+        // Set values
+        FRD.set(FRBLPower);
+        BLD.set(FRBLPower);
+        FLD.set(FLBRPower);
+        BRD.set(FLBRPower);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* shamlessly taken from WPI docs, I'm simply too lazy
  *
@@ -30,7 +98,7 @@ import edu.wpi.first.wpilibj.drive.RobotDriveBase;
  * 
  * 
  * I barely understand how this works so we're keeping it such that I can kind of grasp it
- */
+ *
 
 public class mecDrive extends RobotDriveBase implements Sendable, AutoCloseable {
 
@@ -43,15 +111,16 @@ public class mecDrive extends RobotDriveBase implements Sendable, AutoCloseable 
     // realMotorReal !!!!!!!!
     public static SparkMax frontRightMotor = new SparkMax(Constants.frontRightID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
     public static SparkMax backRightMotor = new SparkMax(Constants.backRightID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
-    public static SparkMax backLefttMotor = new SparkMax(Constants.frontLeftID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
+    public static SparkMax backLeftMotor = new SparkMax(Constants.frontLeftID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
     public static SparkMax frontLeftMotor = new SparkMax(Constants.frontLeftID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
 
     // Used to send out to the DoubleConsumer
     private double m_frontRightOutput;
     private double m_backRightOutput;
-    
     private double m_backLeftOutput;
     private double m_frontLeftOutput;
+
+    double speed;
 
     private boolean m_isOutputSent; // You're never gonna guess what this does
 
@@ -160,6 +229,23 @@ public class mecDrive extends RobotDriveBase implements Sendable, AutoCloseable 
                 wheelSpeeds[MotorType.kFrontLeft.value]);
         }
 
+        public void setMotor(){
+            m_frontRightOutput = speed;
+            m_backRightOutput = speed;
+            m_backLeftOutput = speed;
+            m_frontLeftOutput = speed;
+
+            m_frontRightMotor.accept(speed);
+            m_backRightMotor.accept(speed);
+            m_backLeftMotor.accept(speed);
+            m_frontLeftMotor.accept(speed);
+
+            frontRightMotor.set(speed);
+            backRightMotor.set(speed);
+            backLeftMotor.set(speed);
+            frontLeftMotor.set(speed);
+        }
+
         @Override
         public void stopMotor(){
             m_frontRightOutput = 0.0;
@@ -171,5 +257,11 @@ public class mecDrive extends RobotDriveBase implements Sendable, AutoCloseable 
             m_backRightMotor.accept(0.0);
             m_backLeftMotor.accept(0.0);
             m_frontLeftMotor.accept(0.0);
+
+            frontRightMotor.set(0.0);
+            backRightMotor.set(0.0);
+            backLeftMotor.set(0.0);
+            frontLeftMotor.set(0.0);
         }
 }
+*/
