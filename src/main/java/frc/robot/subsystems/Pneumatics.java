@@ -14,9 +14,4 @@ public class Pneumatics extends SubsystemBase {
            private final DoubleSolenoid m_doubleSolenoidTopL =
            new DoubleSolenoid(PneumaticsModuleType.REVPH, 3, 4);
                private final Compressor m_compressor = new Compressor(PneumaticsModuleType.REVPH);
-     
-
-            
-
-    
 }
