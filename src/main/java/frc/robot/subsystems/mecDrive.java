@@ -3,7 +3,7 @@ package frc.robot.subsystems;
 import frc.robot.Constants;
 import frc.robot.auton.playAuton;
 import frc.robot.commands.Autos;
-import frc.robot.commands.TeleOp;
+import frc.robot.commands.driveCommand;
 
 import com.revrobotics.spark.SparkMax;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
@@ -16,8 +16,7 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 public class mecDrive extends SubsystemBase{
 
     // Auton main points here for FRC doc reasons (this is the only way I've seen it done)
-    boolean isRecording = false;
-    boolean isAutonomous = false;
+    public static boolean isAutonomous = false;
 
     public static final int autoNumber = 1;
 
@@ -37,12 +36,10 @@ public class mecDrive extends SubsystemBase{
         gyro = new ADXRS450_Gyro();
     }
 
-    public void initDefaultCommand(){
-        setDefaultCommand(new TeleOp());
-    }
+    public void shadowAuton(){
 
-    public Command shadowAuton(){
-        return runOnce(null);
+
+
     }
 
     public void mecanumDrive(double FR, double BR, double BL, double FL){

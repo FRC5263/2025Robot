@@ -6,22 +6,14 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.mecDrive;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Joystick.*;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class TeleOp extends Command {
-  /** Creates a new TeleOp. */
-  public Joystick stick1 = new Joystick(0);
-  Joystick stick2 = new Joystick(1);
-  mecDrive m_mecDrive;
-  recordOp m_recordOp;
-  public TeleOp(Joystick stick1, Joystick stick2, mecDrive m_mecDrive, recordOp m_recordOp) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    this.stick1 = stick1;
-    this.stick2 = stick2;
-    this.m_mecDrive = m_mecDrive;
-    this.m_recordOp = m_recordOp;
+public class autonMain extends Command {
+  /** Creates a new autonMain. */
+  mecDrive mecdrive;
+  public autonMain(mecDrive subsystem) {
+    mecdrive = subsystem;
+    addRequirements(mecdrive);
   }
 
   // Called when the command is initially scheduled.
@@ -31,16 +23,7 @@ public class TeleOp extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(stick1.getRawButton(1)){
-      m_recordOp.operatorControl();
-    }
-    double angle = Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0));
-    double magnitude = Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1));
-    double twist = stick1.getRawAxis(2);
-
-    angle -= mecDrive.gyro.getAngle();
-
-    mecDrive.setSpeed(angle, magnitude, twist);
+    mecdrive.shadowAuton();
   }
 
   // Called once the command ends or is interrupted.
