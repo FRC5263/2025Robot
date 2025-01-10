@@ -7,7 +7,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.mecDrive;
 import edu.wpi.first.wpilibj.Joystick;
-import java.lang.Math;
 
 
 public class driveCommand extends Command{
@@ -19,16 +18,6 @@ public class driveCommand extends Command{
     m_drive = driveSubsystem;
     addRequirements(m_drive);
   }
-
- /* public void execute(){
-    double angle = Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0));
-    double magnitude = Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1));
-    double twist = stick1.getRawAxis(2);
-
-    angle -= mecDrive.gyro.getAngle();
-
-    mecDrive.setSpeed(angle, magnitude, twist);
-  }*/
 
   public boolean isFinished(){
     return false;

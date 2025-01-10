@@ -24,11 +24,11 @@ public class Robot extends TimedRobot {
 
   private final RobotContainer m_robotContainer;
 
-  private Command m_teleOpCommand;
+ @SuppressWarnings("unused")
+private Command m_teleOpCommand;
 
   /**
-   * This function is run when the robot is first started up and should be used for any
-   * initialization code.
+   * Renamed version of InitRobot
    */
   public Robot() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
@@ -38,10 +38,6 @@ public class Robot extends TimedRobot {
 
   /**
    * This function is called every 20 ms, no matter the mode. Use this for items like diagnostics
-   * that you want ran during disabled, autonomous, teleoperated and test.
-   *
-   * <p>This runs after the mode specific periodic functions, but before LiveWindow and
-   * SmartDashboard integrated updating.
    */
   @Override
   public void robotPeriodic() {
@@ -59,12 +55,12 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledPeriodic() {}
 
-  /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
+  /** This autonomous runs the autonomous command selected by RobotContainer. */
   @Override
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
   
-    // schedule the autonomous command (example)
+    // schedule auton
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }

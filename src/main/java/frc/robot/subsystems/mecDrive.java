@@ -1,13 +1,8 @@
 package frc.robot.subsystems;
 
 import frc.robot.Constants;
-import frc.robot.auton.playAuton;
-import frc.robot.commands.Autos;
-import frc.robot.commands.driveCommand;
-
 import com.revrobotics.spark.SparkMax;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
