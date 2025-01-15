@@ -8,8 +8,6 @@ import edu.wpi.first.hal.FRCNetComm.tResourceType;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.util.sendable.Sendable;
-import edu.wpi.first.util.sendable.SendableBuilder;
 
 import com.revrobotics.spark.SparkMax;
 
@@ -17,21 +15,16 @@ import edu.wpi.first.wpilibj.drive.RobotDriveBase;
 
 /* shamlessly taken from WPI docs, I'm simply too lazy
  *
- * wheel config is FINAL, builders MUST do it like this (or execution):
- * 
- *      F
- * \_______//
- * \ |   | //
- *    |   |
- * //_|___|_\
- * //       \
- *      B
+ * w̶h̶e̶e̶l̶ ̶c̶o̶n̶f̶i̶g̶ ̶i̶s̶ ̶F̶I̶N̶A̶L̶,̶ ̶b̶u̶i̶l̶d̶e̶r̶s̶ ̶M̶U̶S̶T̶ ̶d̶o̶ ̶i̶t̶ ̶l̶i̶k̶e̶ ̶t̶h̶i̶s̶ ̶(̶o̶r̶ ̶e̶x̶e̶c̶u̶t̶i̶o̶n̶)̶:̶
+ * I lied everything is a LIE the wheel config is not final
  * 
  * 
  * I barely understand how this works so we're keeping it such that I can kind of grasp it
+ * Like MAYBE three things here matter, just keep it like this until further notice
+ * Code cleanup comes *AFTER* everything works
  */
 
-public class mecDrive extends RobotDriveBase implements Sendable, AutoCloseable {
+public class mecDrive extends RobotDriveBase {
 
     // motorReal !!!
     private final DoubleConsumer m_frontRightMotor;
@@ -53,19 +46,6 @@ public class mecDrive extends RobotDriveBase implements Sendable, AutoCloseable 
     private double m_frontLeftOutput;
 
     private boolean m_isOutputSent; // You're never gonna guess what this does
-
-
-    //-----I can't remove this without the interpreter screaming so they must stay unfortunatley-----//
-    @Override
-    public void initSendable(SendableBuilder builder) {
-        throw new UnsupportedOperationException("Unimplemented method 'initSendable'");
-    }
-
-    @Override
-    public String getDescription() {
-        throw new UnsupportedOperationException("Unimplemented method 'getDescription'");
-    }
-    //-----------------------------------------------------------------------------------------------//
     
     // Wheel speeds
     @SuppressWarnings("MemberName")
@@ -94,8 +74,6 @@ public class mecDrive extends RobotDriveBase implements Sendable, AutoCloseable 
             m_backLeftMotor = backLeftMotor;
             m_frontLeftMotor = frontLeftMotor;
         }
-        @Override
-        public void close(){}
         // Drive method
         // I don't know if this HAL report does anything actually or if it's for a JVM but the code doesn't work without it
         public void driveCartesian(double xSpeed, double ySpeed, double zRoation){
@@ -171,4 +149,15 @@ public class mecDrive extends RobotDriveBase implements Sendable, AutoCloseable 
             m_backLeftMotor.accept(0.0);
             m_frontLeftMotor.accept(0.0);
         }
+
+
+
+
+        //-----I don't even know why this exists but the interpreter screams when it's not there-----//
+        @Override
+        public String getDescription() {
+            throw new UnsupportedOperationException("Unimplemented method 'getDescription'");
+        }
+        //-------------------------------------------------------------------------------------------//
+
 }
