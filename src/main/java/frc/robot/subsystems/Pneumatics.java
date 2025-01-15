@@ -1,7 +1,6 @@
 //Important to the change of the code: https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/wiring-pneumatics-ph.html (mostly for the pressure sensor.)
 package frc.robot.subsystems;
 
-import frc.robot.commands.TeleOp;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
