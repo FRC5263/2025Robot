@@ -76,6 +76,8 @@ public class mecDrive extends RobotDriveBase {
         }
         // Drive method
         // I don't know if this HAL report does anything actually or if it's for a JVM but the code doesn't work without it
+        // I don't even think this does anything
+        
         public void driveCartesian(double xSpeed, double ySpeed, double zRoation){
             driveCartesian(xSpeed, ySpeed, zRoation, Rotation2d.kZero);
         }
@@ -100,6 +102,7 @@ public class mecDrive extends RobotDriveBase {
             m_frontLeftMotor.accept(m_frontLeftOutput);
         }
 
+        // This either
         public void drivePolar(double magnitude, Rotation2d angle, double zRoation){
             if(!m_isOutputSent){
                 HAL.report(tResourceType.kResourceType_RobotDrive, tInstances.kRobotDrive2_MecanumPolar, 4);
