@@ -32,26 +32,8 @@ public class Pneumatics extends SubsystemBase {
                     }
             }
             public void initDefaultCommand(){}
-            //Random stuff we might not need:
-    public void pitchUpTop(){
-        TOP_PUMP.set(DoubleSolenoid.Value.kForward);
-    }
-    public void pitchUpBottom(){
-        BOTTOM_PUMP.set(DoubleSolenoid.Value.kForward);
-    }
-    public void pitchDownTop(){
-        TOP_PUMP.set(DoubleSolenoid.Value.kReverse);
-    }
-    public void pitchDownBottom(){
-        BOTTOM_PUMP.set(DoubleSolenoid.Value.kReverse);
-    }
-    public void CompressorOff(){
-        COMPRESSOR.disable();
-    }
-    public void CompressorOn(){
-        COMPRESSOR.enableDigital();
-    }
-
+         
+            
 
             
 
