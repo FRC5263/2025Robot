@@ -13,9 +13,9 @@ public class Pneumatics extends SubsystemBase {
     public static Compressor COMPRESSOR;
     public boolean pressureSwitch;
       public Pneumatics(){
-        TOP_PUMP = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0, 0);
-        BOTTOM_PUMP = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0, 0);
-        COMPRESSOR = new Compressor(PneumaticsModuleType.REVPH);
+        TOP_PUMP = new DoubleSolenoid(0, PneumaticsModuleType.CTREPCM, 0, 1);
+        BOTTOM_PUMP = new DoubleSolenoid(PneumaticsModuleType.CTREPCM,2,3);
+        COMPRESSOR = new Compressor(PneumaticsModuleType.CTREPCM);
       }
         
             public void periodic(){
