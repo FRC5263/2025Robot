@@ -36,7 +36,7 @@ public class TeleOp extends Command {
     if(stick1.getRawButton(1)){
       m_recordOp.operatorControl();
     }
-      m_drive.driveCartesian(Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0)), Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1)), stick2.getRawAxis(0));
+      m_drive.driveCartesian(.2 * Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0))^3, .6 * Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1))^3, .8 * stick2.getRawAxis(0)^3);
    }
 
 
