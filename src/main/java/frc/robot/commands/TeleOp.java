@@ -16,6 +16,9 @@ public class TeleOp extends Command {
   mecDrive m_mecDrive;
   recordOp m_recordOp;
   MecanumDrive m_drive;
+  double x = Math.pow((Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0)) * .9), 3);
+  double y = Math.pow((Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1)) * .9), 3);
+  double z = Math.pow((stick2.getRawAxis(0) * .9), 3);
   
   public TeleOp(Joystick stick1, Joystick stick2, mecDrive m_mecDrive, recordOp m_recordOp) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -36,7 +39,7 @@ public class TeleOp extends Command {
     if(stick1.getRawButton(1)){
       m_recordOp.operatorControl();
     }
-      m_drive.driveCartesian(.2 * Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0))^3, .6 * Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1))^3, .8 * stick2.getRawAxis(0)^3);
+      m_drive.driveCartesian(x, y, z);
    }
 
 
