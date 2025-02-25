@@ -5,33 +5,32 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.mecDrive;
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
-import static edu.wpi.first.units.Units.Value;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
-import frc.robot.subsystems.Pneumatics;
+
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class TeleOp extends Command {
   /** Creates a new TeleOp. */
   public Joystick stick1 = new Joystick(0);
-  Joystick stick2 = new Joystick(1);
+  public Joystick stick2 = new Joystick(1);
   mecDrive m_mecDrive;
   recordOp m_recordOp;
-  Pneumatics m_pneumatics;
+  MecanumDrive m_drive;
   
-  public TeleOp(Joystick stick1, Joystick stick2, mecDrive m_mecDrive, recordOp m_recordOp, Pneumatics m_pneumatics) {
+  public TeleOp(Joystick stick1, Joystick stick2, mecDrive m_mecDrive, recordOp m_recordOp) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.stick1 = stick1;
     this.stick2 = stick2;
     this.m_mecDrive = m_mecDrive;
     this.m_recordOp = m_recordOp;
-    this.m_pneumatics = m_pneumatics;
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -39,35 +38,10 @@ public class TeleOp extends Command {
     if(stick1.getRawButton(1)){
       m_recordOp.operatorControl();
     }
-    double angle = Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0));
-    double magnitude = Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1));
-    double twist = stick1.getRawAxis(2);
-
-    angle -= mecDrive.gyro.getAngle();
-
-    mecDrive.setSpeed(angle, magnitude, twist);
-
-    if(stick2.getRawButton(/*currently undecided*/2)){
-      //checks if solenoid is already extended
-      if(Pneumatics.TOP_PUMP.get() == DoubleSolenoid.Value.kForward){
-        //"if pressed again"
-        Pneumatics.TOP_PUMP.set(DoubleSolenoid.Value.kReverse);
-    }
-    else{
-      Pneumatics.TOP_PUMP.set(DoubleSolenoid.Value.kForward);
-    }
+      m_drive.driveCartesian(Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0)), Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1)), stick2.getRawAxis(0));
    }
-   
-   if(stick2.getRawButton(/*currently undecided*/3)){
-    if(Pneumatics.BOTTOM_PUMP.get() == DoubleSolenoid.Value.kForward){
-      Pneumatics.BOTTOM_PUMP.set(DoubleSolenoid.Value.kReverse);
-    }
-    else{
-      Pneumatics.BOTTOM_PUMP.set(DoubleSolenoid.Value.kForward);
-    }
-   }
-   
-  } 
+
+
 
   // Called once the command ends or is interrupted.
   @Override

@@ -4,6 +4,7 @@ import frc.robot.Constants;
 import com.revrobotics.spark.SparkMax;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
 /*
@@ -12,61 +13,31 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
  */
 
 public class mecDrive extends SubsystemBase{
-
-    // Auton main points here for FRC doc reasons (this is the only way I've seen it done)
-    // I ended up leaving it empty, autonMain is being linked from its own file for conviniences sake
-    
-    //-----I don't think this block does anything-----//
-        // public static boolean isAutonomous = false;
-
-        // public static final int autoNumber = 1;
-
-        // static String autoFile = new String("auton" + autoNumber + ".csv");
-    //------------------------------------------------//
-
-    public static MotorController FRD;      //= new SparkMax(Constants.frontRightID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
-    public static MotorController BRD;      //= new SparkMax(Constants.backRightID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
-    public static MotorController BLD;      // = new SparkMax(Constants.backLeftID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
-    public static MotorController FLD;      // = new SparkMax(Constants.frontLeftID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
-    public static ADXRS450_Gyro gyro;
+    private static SparkMax frontLeft;
+    private SparkMax frontRight;
+    private SparkMax rearLeft;
+    private SparkMax rearRight;
+    private static MecanumDrive mecanumDrive;
 
     public mecDrive(){
-        FRD = new SparkMax(Constants.frontRightID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
-        BRD = new SparkMax(Constants.backRightID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
-        BLD = new SparkMax(Constants.backLeftID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
-        FLD = new SparkMax(Constants.frontLeftID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
-        gyro = new ADXRS450_Gyro();
+        frontLeft = new SparkMax(Constants.frontLeftID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
+        frontRight = new SparkMax(Constants.frontRightID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
+        rearLeft = new SparkMax(Constants.backLeftID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
+        rearRight = new SparkMax(Constants.backRightID, com.revrobotics.spark.SparkLowLevel.MotorType.kBrushless);
+
+        // Invert motors on one side so they spin in opposite directions
+        frontLeft.setInverted(false);
+        rearLeft.setInverted(false);
+        frontRight.setInverted(true);
+        rearRight.setInverted(true);
+        // Initialize MecanumDrive
+        mecanumDrive = new MecanumDrive(frontLeft, rearLeft, frontRight, rearRight);
     }
 
-    public void shadowAuton(){}
-
-    public void mecanumDrive(double FR, double BR, double BL, double FL){
-        FRD.set(FR);
-        BRD.set(BR);
-        BLD.set(BL);
-        FLD.set(FL);
-    }
-
-    public static void setSpeed(double translationAngle, double translationPower, double turnPower){
-        // Motor power math, shamelessly stolen from 6624's implamentation because I don't know circles
-        double FLBRPower = translationPower * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) + Math.cos(translationAngle));
-        double FRBLPower = translationPower * Math.sqrt(2) * 0.5 * (Math.sin(translationAngle) - Math.cos(translationAngle));
-
-        // Make power consistent on turn, check to see if turning angle interferes with math
-        double turnScale = Math.max(Math.abs(FLBRPower + turnPower), Math.abs(FLBRPower - turnPower));
-        turnScale = Math.max(turnScale, Math.max(Math.abs(FRBLPower + turnPower), Math.abs(FLBRPower - turnPower)));
-
-        // Scale
-        if(Math.abs(turnScale) < 1.0){
-            turnScale = 1.0;
-        }
-
-
-        // Set values
-        FRD.set(FRBLPower);
-        BLD.set(FRBLPower);
-        FLD.set(FLBRPower);
-        BRD.set(FLBRPower);
+    public static void drive(double ySpeed, double xSpeed, double zRotation) {
+       // Use MecanumDrive's drive method
+        mecanumDrive.driveCartesian(ySpeed, xSpeed, zRotation);
+        mecanumDrive.feed();
     }
 }
 

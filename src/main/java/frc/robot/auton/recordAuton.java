@@ -25,10 +25,10 @@ public class recordAuton {
             recorder.append("" + (System.currentTimeMillis() - startTime));
         }
 
-        recorder.append("," + mecDrive.FRD.get());
+       /* recorder.append("," + mecDrive.FRD.get());
         recorder.append("," + mecDrive.BRD.get());
         recorder.append("," + mecDrive.BLD.get());
-        recorder.append("," + mecDrive.FLD.get());
+        recorder.append("," + mecDrive.FLD.get());*/
     }
 
     public void end() throws IOException{
