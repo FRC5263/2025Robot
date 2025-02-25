@@ -9,19 +9,6 @@ public final class Constants {
    * Motor order:
    * First 4 ALWAYS drivetrain
    * More to come
-   * 
-   * 
-   * 
-   * 
-   * 
-
-
-
-
-
-
-
-   
    * There's no 0-indexing on the CAN IDs >:(
    */
   public static final int CANID[] = {1, 2, 3, 4};

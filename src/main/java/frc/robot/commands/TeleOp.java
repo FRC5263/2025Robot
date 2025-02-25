@@ -10,9 +10,7 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
 import edu.wpi.first.wpilibj.Joystick;
 
-/* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class TeleOp extends Command {
-  /** Creates a new TeleOp. */
   public Joystick stick1 = new Joystick(0);
   public Joystick stick2 = new Joystick(1);
   mecDrive m_mecDrive;
