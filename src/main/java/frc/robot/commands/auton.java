@@ -12,8 +12,8 @@ public class auton extends Command {
   boolean isAutonomous = true;
   public auton() {}
     mecDrive mecdrive;
-    public auton(mecDrive subsystem){
-        mecdrive = subsystem;
+    public auton(mecDrive m_MecDrive){
+        mecdrive = m_MecDrive;
     }
 
   @Override

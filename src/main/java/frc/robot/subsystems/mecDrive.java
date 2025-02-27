@@ -9,10 +9,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
 public class mecDrive extends SubsystemBase{
-    private SparkMax frontLeft;
-    private SparkMax frontRight;
-    private SparkMax rearLeft;
-    private SparkMax rearRight;
+    public static SparkMax frontLeft;
+    public static SparkMax frontRight;
+    public static SparkMax rearLeft;
+    public static SparkMax rearRight;
     private static MecanumDrive mecanumDrive;
     private SparkMaxConfig rightMaxConfig;
 

@@ -32,12 +32,11 @@ public class playAuton {
             t_delta = nextDouble - (System.currentTimeMillis() - startTime);
 
             if(t_delta <= 0){
-                /*
-                mecDrive.FRD.set(scanner.nextDouble());
-                mecDrive.BRD.set(scanner.nextDouble());
-                mecDrive.BLD.set(scanner.nextDouble());
-                mecDrive.FLD.set(scanner.nextDouble());
-                onTime = true;*/
+                mecDrive.frontRight.set(scanner.nextDouble());
+                mecDrive.rearRight.set(scanner.nextDouble());
+                mecDrive.rearLeft.set(scanner.nextDouble());
+                mecDrive.frontLeft.set(scanner.nextDouble());
+                onTime = true;
             }
             else{ onTime = false; }
         }
@@ -49,10 +48,10 @@ public class playAuton {
         }
     }
     public void end(){
-        /*mecDrive.FRD.set(0.0);
-        mecDrive.BRD.set(0.0);
-        mecDrive.BLD.set(0.0);
-        mecDrive.FLD.set(0.0);*/
+        mecDrive.frontRight.set(0.0);
+        mecDrive.rearRight.set(0.0);
+        mecDrive.rearLeft.set(0.0);
+        mecDrive.frontLeft.set(0.0);
 
         if(scanner != null){
             scanner.close();
