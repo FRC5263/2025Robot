@@ -39,9 +39,11 @@ public class TeleOp extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    // So theoretically maybeprobably button 2 should start the record process
     if(stick1.getRawButton(2)){
       m_recordOp.isOperatorControl = false;
     }
+    // And hopefully maybeprobably this will end and save it
     if(stick1.getRawButton(1)){
       m_recordOp.operatorControl();
     }

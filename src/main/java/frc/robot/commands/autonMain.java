@@ -2,14 +2,14 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
+/* I have no clue as to if this actually does anything I'm keeping it until further notice */
+
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.mecDrive;
 
-/* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class autonMain extends Command {
-  /** Creates a new autonMain. */
   mecDrive mecdrive;
   public autonMain(mecDrive subsystem) {
     mecdrive = subsystem;
