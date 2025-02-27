@@ -33,7 +33,7 @@ public class recordOp extends Command {
         recorder.record();
       } catch (Exception e) { e.printStackTrace(); }
     }
-
+  
     try{
       if(recorder != null){
     			recorder.end();

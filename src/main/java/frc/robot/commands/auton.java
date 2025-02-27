@@ -10,6 +10,7 @@ import frc.robot.subsystems.mecDrive;
 
 public class auton extends Command {
   boolean isAutonomous = true;
+  playAuton player = null;
   public auton() {}
     mecDrive mecdrive;
     public auton(mecDrive m_MecDrive){
@@ -21,25 +22,23 @@ public class auton extends Command {
 
   @Override
   public void execute() {
-            playAuton player = null;
         try {
             player = new playAuton();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        while(isAutonomous){
         if(player != null){
             player.play();
-        }
-    }
-    if(player != null){
-        player.end();
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    if(player != null){
+      player.end();
+  }
+  }
 
   // Returns true when the command should end.
   @Override

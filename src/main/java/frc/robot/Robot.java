@@ -67,7 +67,6 @@ private Command m_teleOpCommand;
   @Override
   public void autonomousInit() {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-  
     // schedule auton
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
@@ -76,7 +75,9 @@ private Command m_teleOpCommand;
 
   /** This function is called periodically during autonomous. */
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+    CommandScheduler.getInstance().run();
+  }
 
   @Override
   public void teleopInit() {
@@ -84,7 +85,6 @@ private Command m_teleOpCommand;
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    m_teleOpCommand = m_robotContainer.getTeleOpCommand();
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }

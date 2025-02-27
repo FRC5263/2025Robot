@@ -39,6 +39,9 @@ public class TeleOp extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if(stick1.getRawButton(2)){
+      m_recordOp.isOperatorControl = false;
+    }
     if(stick1.getRawButton(1)){
       m_recordOp.operatorControl();
     }
