@@ -11,7 +11,6 @@ import frc.robot.commands.auton;
 import frc.robot.subsystems.mecDrive;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
 /**
  * This class is where the bulk of the robot should be declared. Very little robot logic should actually be handled here
@@ -32,9 +31,9 @@ public class RobotContainer {
 
 
   public RobotContainer() {
-    configureBindings();
-    m_MecDrive.setDefaultCommand(new driveCommand(m_MecDrive, () -> stick1.getRawAxis(1), () -> stick1.getRawAxis(0), () -> stick2.getRawAxis(0)));
+    m_MecDrive.setDefaultCommand(new driveCommand(m_MecDrive, () -> TeleOp.x, () -> TeleOp.y, () -> -TeleOp.z));
     m_TeleOp = new TeleOp(stick1, stick2, m_MecDrive, m_RecordOp);
+    configureBindings();
 
   }
 
