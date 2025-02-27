@@ -31,7 +31,7 @@ public class RobotContainer {
 
 
   public RobotContainer() {
-    m_MecDrive.setDefaultCommand(new driveCommand(m_MecDrive, () -> TeleOp.x, () -> TeleOp.y, () -> -TeleOp.z));
+    m_MecDrive.setDefaultCommand(new driveCommand(m_MecDrive, () -> Math.pow(stick1.getRawAxis(0) * .9, 3), () -> Math.pow(stick1.getRawAxis(1) * .9, 3), () -> -Math.pow((stick2.getRawAxis(0) * .9), 3)));
     m_TeleOp = new TeleOp(stick1, stick2, m_MecDrive, m_RecordOp);
     configureBindings();
 
