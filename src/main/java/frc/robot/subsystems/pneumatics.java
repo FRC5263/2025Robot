@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 
-import static edu.wpi.first.units.Units.Value;
 
 import edu.wpi.first.wpilibj.Compressor;
 
@@ -56,6 +55,10 @@ public class pneumatics extends SubsystemBase {
   }
   public void compressorOff(){
     compressor.disable();
+    topSolenoid.set(DoubleSolenoid.Value.kOff);
+    bottomSolenoid.set(DoubleSolenoid.Value.kOff);
+    topSolenoid.set(DoubleSolenoid.Value.kOff);
+    bottomSolenoid.set(DoubleSolenoid.Value.kOff);
   }
   public void compressorOn(){
     compressor.enableDigital();

@@ -1,6 +1,6 @@
 package frc.robot.auton;
-import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.Scanner;
 
 import frc.robot.RobotContainer;
@@ -15,7 +15,7 @@ public class playAuton {
     double nextDouble;
 
     public playAuton() throws FileNotFoundException{
-            scanner = new Scanner(new File(RobotContainer.autoFile));
+            scanner = new Scanner(new FileReader("//src//main//java//frc//robot//auton//auton1.csv"));
             scanner.useDelimiter(",\\n");
     
             startTime = System.currentTimeMillis();

@@ -5,6 +5,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.mecDrive;
+import frc.robot.subsystems.pneumatics;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
 
@@ -16,13 +17,16 @@ public class TeleOp extends Command {
   mecDrive m_mecDrive;
   recordOp m_recordOp;
   MecanumDrive m_drive;
-  
-  public TeleOp(Joystick stick1, Joystick stick2, mecDrive m_mecDrive, recordOp m_recordOp) {
+  pneumatics m_Pneumatics;
+
+
+  public TeleOp(Joystick stick1, Joystick stick2, mecDrive m_mecDrive, recordOp m_recordOp, pneumatics m_Pneumatics) {
     // Use addRequirements() here to declare subsystem dependencies.
     TeleOp.stick1 = stick1;
     TeleOp.stick2 = stick2;
     this.m_mecDrive = m_mecDrive;
     this.m_recordOp = m_recordOp;
+    this.m_Pneumatics = m_Pneumatics;
   }
 
   // Called when the command is initially scheduled.
@@ -33,14 +37,6 @@ public class TeleOp extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // So theoretically maybeprobably button 2 should start the record process
-    if(stick1.getRawButton(2)){
-      m_recordOp.isOperatorControl = false;
-    }
-    // And hopefully maybeprobably this will end and save it
-    if(stick1.getRawButton(1)){
-      m_recordOp.operatorControl();
-    }
     if(Math.pow((Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0)) * .9), 3) < .301 && Math.pow((Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0)) * .9), 3) > -.301){
         m_drive.driveCartesian(0, Math.pow((Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1) * .9)), 3), -stick2.getRawAxis(0));
         m_drive.feed();
@@ -55,6 +51,14 @@ public class TeleOp extends Command {
     }
     m_drive.driveCartesian(-Math.pow((Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0)) * .9), 3), Math.pow((Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1) * .9)), 3), -stick2.getRawAxis(0));
     m_drive.feed();
+
+    // I do not know what this does
+    if(stick1.getRawButton(1)){
+      m_Pneumatics.compressorUpTop();
+    }
+    if(stick1.getRawButton(2)){
+      m_Pneumatics.compressorDownTop();
+    }
   }
 
 

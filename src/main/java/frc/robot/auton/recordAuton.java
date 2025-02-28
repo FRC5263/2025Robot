@@ -16,7 +16,7 @@ public class recordAuton {
     public recordAuton() throws IOException{
         startTime = System.currentTimeMillis();
 
-        recorder = new FileWriter(RobotContainer.autoFile);
+        recorder = new FileWriter("auton1.csv");
     }
 
     public void record() throws IOException{
