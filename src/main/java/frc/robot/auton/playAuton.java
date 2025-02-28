@@ -3,7 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import frc.robot.Robot;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.mecDrive;
 
 public class playAuton {
@@ -15,10 +15,10 @@ public class playAuton {
     double nextDouble;
 
     public playAuton() throws FileNotFoundException{
-        scanner = new Scanner(new File(Robot.autoFile));
-        scanner.useDelimiter(",\\n");
-
-        startTime = System.currentTimeMillis();
+            scanner = new Scanner(new File(RobotContainer.autoFile));
+            scanner.useDelimiter(",\\n");
+    
+            startTime = System.currentTimeMillis();
     }
 
     public void play(){

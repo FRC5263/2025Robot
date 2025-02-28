@@ -19,9 +19,13 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class RobotContainer {
   // Every used object declared here
   
+  public static final int autoNumber = 1;
+
+  public static String autoFile = new String("auton" + autoNumber + ".csv");
+
   public final mecDrive m_MecDrive = new mecDrive();
   private final recordOp m_RecordOp = new recordOp();
-  private final auton m_auton = new auton(m_MecDrive);
+  private final auton m_auton = new auton(m_MecDrive, null);
 
 
   private final Command m_TeleOp;
@@ -31,6 +35,7 @@ public class RobotContainer {
 
 
   public RobotContainer() {
+    // This is the absolute worst code I've ever written
     m_MecDrive.setDefaultCommand(new driveCommand(m_MecDrive, () -> Math.pow(stick1.getRawAxis(0) * .9, 3), () -> Math.pow(stick1.getRawAxis(1) * .9, 3), () -> -Math.pow((stick2.getRawAxis(0) * .9), 3)));
     m_TeleOp = new TeleOp(stick1, stick2, m_MecDrive, m_RecordOp);
     configureBindings();

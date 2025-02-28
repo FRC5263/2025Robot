@@ -2,7 +2,7 @@ package frc.robot.auton;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import frc.robot.Robot;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.mecDrive;
 
 
@@ -16,7 +16,7 @@ public class recordAuton {
     public recordAuton() throws IOException{
         startTime = System.currentTimeMillis();
 
-        recorder = new FileWriter(Robot.autoFile);
+        recorder = new FileWriter(RobotContainer.autoFile);
     }
 
     public void record() throws IOException{
