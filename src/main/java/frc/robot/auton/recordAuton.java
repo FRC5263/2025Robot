@@ -2,39 +2,35 @@ package frc.robot.auton;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.mecDrive;
 
 
-public class recordAuton {
-    FileWriter recorder;
-
-    
-
+public class recordAuton{
+    FileWriter writer;
     long startTime;
 
-    public recordAuton() throws IOException{
+    public recordAuton() {
         startTime = System.currentTimeMillis();
-
-        recorder = new FileWriter("auton1.csv");
-    }
-
-    public void record() throws IOException{
-        // Begin recording frames
-        if(recorder != null){
-            recorder.append("" + (System.currentTimeMillis() - startTime));
+        try{
+            writer = new FileWriter("auton1.csv", true);
         }
-
-        recorder.append("," + mecDrive.frontRight.get());
-        recorder.append("," + mecDrive.rearRight.get());
-        recorder.append("," + mecDrive.rearLeft.get());
-        recorder.append("," + mecDrive.frontLeft.get());
+        catch(IOException e){
+            System.out.print("Shit's fucked: " + e.getMessage());
+        }
     }
-
+    public void record() throws IOException{
+        if(writer != null){
+            writer.append("" + (System.currentTimeMillis() - startTime));
+        }
+        writer.append("," + mecDrive.frontRight.get());
+        writer.append("," + mecDrive.rearRight.get());
+        writer.append("," + mecDrive.rearLeft.get());
+        writer.append("," + mecDrive.frontLeft.get());
+    }
     public void end() throws IOException{
-        if(recorder != null){
-            recorder.flush();
-            recorder.close();
+        if(writer != null){
+            writer.flush();
+            writer.close();
         }
     }
 }

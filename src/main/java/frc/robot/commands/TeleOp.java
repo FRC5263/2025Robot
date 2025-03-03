@@ -4,6 +4,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.auton.recordAuton;
 import frc.robot.subsystems.mecDrive;
 import frc.robot.subsystems.pneumatics;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
@@ -58,6 +59,9 @@ public class TeleOp extends Command {
     }
     if(stick1.getRawButton(2)){
       m_Pneumatics.compressorDownTop();
+    }
+    if(stick1.getRawButton(4)){
+      m_recordOp.operatorControl();
     }
   }
 
