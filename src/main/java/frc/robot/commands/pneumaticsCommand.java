@@ -11,6 +11,11 @@ import frc.robot.subsystems.pneumatics;
 // Mallek if you can hear us Mallek please save us Mallek
 // Please save us Mallek
 
+
+/*  all thats REALLY needed in execute is to enable the compressor (which i set to hybrid for now)
+ * If the pressure switch continues to kill itself(as always) the swich type can be changed
+*/
+
 public class pneumaticsCommand extends Command {
   private pneumatics m_Pneumatics;
   public pneumaticsCommand(pneumatics pneumaticsSubsystem) {
@@ -22,7 +27,10 @@ public class pneumaticsCommand extends Command {
   public void initialize() {}
 
   @Override
-  public void execute() {}
+  public void execute() {
+    
+    m_Pneumatics.compressorOn();
+  }
 
   @Override
   public void end(boolean interrupted) {

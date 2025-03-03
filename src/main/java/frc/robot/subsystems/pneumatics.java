@@ -61,6 +61,6 @@ public class pneumatics extends SubsystemBase {
     bottomSolenoid.set(DoubleSolenoid.Value.kOff);
   }
   public void compressorOn(){
-    compressor.enableDigital();
+    compressor.enableHybrid(35,90);
   }
 }
