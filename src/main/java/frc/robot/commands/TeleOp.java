@@ -38,16 +38,17 @@ public class TeleOp extends Command {
   @Override
   public void execute() {
     // TODO: wrap the stick axis in their own vars so I don't have to change this logic everywhere and I don't have to debug THIS (and it'll look a bit prettier)
+    // Deadzones for a given direction
     if(Math.pow((Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0)) * .9), 3) < .301 && Math.pow((Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0)) * .9), 3) > -.301){
-        m_drive.driveCartesian(0, Math.pow((Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1) * .9)), 3), -stick2.getRawAxis(0));
+        m_drive.driveCartesian(0, Math.pow((Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1) * .9)), 3), -stick2.getRawAxis(0));     // X deadzones
         m_drive.feed();
     }
     if(Math.pow((Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1)) * .9), 3) < .301 && Math.pow((Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1)) * .9), 3) > -.301){
-      m_drive.driveCartesian(-Math.pow((Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0)) * .9), 3), 0, -stick2.getRawAxis(0));
+      m_drive.driveCartesian(-Math.pow((Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0)) * .9), 3), 0, -stick2.getRawAxis(0));      // Y deadzones
       m_drive.feed();
     }
     if(stick2.getRawAxis(0) < .301 && stick2.getRawAxis(0) > -.301){
-      m_drive.driveCartesian(-Math.pow((Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0)) * .9), 3), Math.pow((Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1) * .9)), 3), 0);
+      m_drive.driveCartesian(-Math.pow((Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0)) * .9), 3), Math.pow((Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1) * .9)), 3), 0);     // Z deadzones
       m_drive.feed();
     }
     m_drive.driveCartesian(-Math.pow((Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0)) * .9), 3), Math.pow((Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1) * .9)), 3), -stick2.getRawAxis(0));
@@ -73,11 +74,9 @@ public class TeleOp extends Command {
 
 
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {}
 
-  // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     return false;

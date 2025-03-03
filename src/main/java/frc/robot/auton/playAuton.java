@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import frc.robot.subsystems.mecDrive;
 
 
@@ -18,6 +19,7 @@ public class playAuton{
     public Scanner scanner;
     long startTime;
     boolean onTime = true;
+    MecanumDrive m_drive;
     double nextDouble;
 
     public playAuton() throws FileNotFoundException{
@@ -45,6 +47,7 @@ public class playAuton{
                 mecDrive.rearRight.set(scanner.nextDouble());
                 mecDrive.rearLeft.set(scanner.nextDouble());
                 mecDrive.frontLeft.set(scanner.nextDouble());
+                m_drive.feed();
                 onTime = true;
             }
             else{onTime = false;}

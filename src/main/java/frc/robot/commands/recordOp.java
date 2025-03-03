@@ -14,6 +14,8 @@ import frc.robot.auton.recordAuton;
  * Entire thing runs on an if statment that determines wether or not isOperatorControl is true, which sets the mode
  * If false, record
  * If true, run back into teleOp
+ * 
+ * Also note: even though this a command, this acts more like a subsytem than anything. The command part is simply boilerplate so that TeleOp will take the argument
  */
 
 

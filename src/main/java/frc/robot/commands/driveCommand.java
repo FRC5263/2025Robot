@@ -10,6 +10,10 @@ import edu.wpi.first.wpilibj.Joystick;
 import java.util.function.DoubleSupplier;
 
 
+/* Hello all continuous years in FRC5263
+ * Use this as a good command example
+ * This is good code so until the structre of the command system itself changes, use this as a base for the drive command
+*/
 public class driveCommand extends Command{
   public void initialize(){}
   Joystick stick1 = new Joystick(0);
