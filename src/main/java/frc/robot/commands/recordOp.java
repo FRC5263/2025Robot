@@ -20,7 +20,7 @@ import frc.robot.auton.recordAuton;
 
 
 public class recordOp extends Command {
-  public boolean isOperatorControl = true;
+  public boolean isOperatorControl;
   public boolean isRecording;
   public recordOp() {}
 

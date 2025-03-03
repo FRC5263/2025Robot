@@ -1,4 +1,5 @@
 package frc.robot.auton;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -12,21 +13,17 @@ import frc.robot.subsystems.mecDrive;
 public class recordAuton{
     FileWriter writer;
     long startTime;
+    File file;
 
-    public recordAuton() {
-        startTime = System.currentTimeMillis();
-        try{
-            // TODO: automate file names in constants file
-            writer = new FileWriter("auton1.csv", true);
-        }
-        catch(IOException e){
-            System.out.print("Shit's fucked: " + e.getMessage());
-        }
-    }
+    public recordAuton() {}
     public void record() throws IOException{
-        if(writer != null){
-            writer.append("" + (System.currentTimeMillis() - startTime));
-        }
+        startTime = System.currentTimeMillis();
+            file = new File("C:\\Users\\Robotics\\Documents\\2025Robot\\src\\main\\java\\frc\\robot\\auton\\auton1.csv");
+            // TODO: automate file names in constants file
+            writer = new FileWriter("C:\\Users\\Robotics\\Documents\\2025Robot\\src\\main\\java\\frc\\robot\\auton\\auton1.csv", true);
+        
+        writer.append("" + (System.currentTimeMillis() - startTime));
+        
         writer.append("," + mecDrive.frontRight.get());
         writer.append("," + mecDrive.rearRight.get());
         writer.append("," + mecDrive.rearLeft.get());
