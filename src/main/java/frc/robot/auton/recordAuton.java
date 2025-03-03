@@ -4,6 +4,10 @@ import java.io.IOException;
 
 import frc.robot.subsystems.mecDrive;
 
+/* Auton begins here
+ * 
+ * This creates a file write system called writer and appends a CSV file with the double values in order
+ */
 
 public class recordAuton{
     FileWriter writer;
@@ -12,6 +16,7 @@ public class recordAuton{
     public recordAuton() {
         startTime = System.currentTimeMillis();
         try{
+            // TODO: automate file names in constants file
             writer = new FileWriter("auton1.csv", true);
         }
         catch(IOException e){

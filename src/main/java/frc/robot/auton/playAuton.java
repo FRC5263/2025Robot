@@ -7,6 +7,12 @@ import java.util.Scanner;
 import frc.robot.subsystems.mecDrive;
 
 
+/* 2nd step in auton method
+ * 
+ * This opens up the CSV file with a scanner and sets the motor values (bulk of logic goes here)
+ * 
+ */
+
 
 public class playAuton{
     public Scanner scanner;
@@ -21,6 +27,13 @@ public class playAuton{
     }
     public void play() throws InputMismatchException{
         if(scanner != null && scanner.hasNextDouble()){
+
+            /* 
+             * Delta time is important here; it subtracts the time from the start of the auton recording and the current system time
+             * If the measured time is above a millisecond it'll start lagging
+             * On case of not being on time, the system self-desructs (closes scanner and ends)
+             */
+
             double deltaTime;
 
             if(onTime = true){
@@ -39,6 +52,7 @@ public class playAuton{
         else{
             if(scanner != null){
                 scanner.close();
+                end();
             }
         }
     }

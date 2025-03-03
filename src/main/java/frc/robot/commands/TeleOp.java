@@ -4,7 +4,6 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.auton.recordAuton;
 import frc.robot.subsystems.mecDrive;
 import frc.robot.subsystems.pneumatics;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
@@ -38,6 +37,7 @@ public class TeleOp extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    // TODO: wrap the stick axis in their own vars so I don't have to change this logic everywhere and I don't have to debug THIS (and it'll look a bit prettier)
     if(Math.pow((Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0)) * .9), 3) < .301 && Math.pow((Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0)) * .9), 3) > -.301){
         m_drive.driveCartesian(0, Math.pow((Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1) * .9)), 3), -stick2.getRawAxis(0));
         m_drive.feed();
@@ -54,12 +54,15 @@ public class TeleOp extends Command {
     m_drive.feed();
 
     // I do not know what this does
+    // TODO: Mallek please make this work :(
     if(stick1.getRawButton(1)){
       m_Pneumatics.compressorUpTop();
     }
     if(stick1.getRawButton(2)){
       m_Pneumatics.compressorDownTop();
     }
+
+
     if(stick1.getRawButton(4)){
       m_recordOp.operatorControl();
     }

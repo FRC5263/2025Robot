@@ -9,14 +9,18 @@ import java.io.IOException;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.auton.recordAuton;
 
-/* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
+/*
+ * Last step in the autonomus before everything is wrapped up and handed over to the container
+ * Entire thing runs on an if statment that determines wether or not isOperatorControl is true, which sets the mode
+ * If false, record
+ * If true, run back into teleOp
+ */
+
+
 public class recordOp extends Command {
-  /** Creates a new recordOp. */
   public boolean isOperatorControl = true;
   public boolean isRecording;
-  public recordOp() {
-    // Use addRequirements() here to declare subsystem dependencies.
-  }
+  public recordOp() {}
 
   public void operatorControl(){
     recordAuton recorder = null;

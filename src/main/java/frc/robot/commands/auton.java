@@ -8,8 +8,13 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.auton.playAuton;
 import frc.robot.subsystems.mecDrive;
 
+/*
+ * Step 3: 
+ * This just wraps the auton play method into a command runnable by the recordOp file
+ */
+
+
 public class auton extends Command {
-  boolean isAutonomous = true;
   playAuton player = null;
   mecDrive mecdrive;
     public auton(mecDrive m_MecDrive, playAuton m_auton){
