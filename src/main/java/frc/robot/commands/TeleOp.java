@@ -63,6 +63,9 @@ public class TeleOp extends Command {
     if(stick1.getRawButton(4)){
       m_recordOp.operatorControl();
     }
+    if(stick1.getRawButton(5)){
+      m_recordOp.isRecording = false;
+    }
   }
 
 
