@@ -18,7 +18,6 @@ public class recordAuton{
     public recordAuton() {}
     public void record() throws IOException{
         startTime = System.currentTimeMillis();
-            file = new File("C:\\Users\\Robotics\\Documents\\2025Robot\\src\\main\\java\\frc\\robot\\auton\\auton1.csv");
             // TODO: automate file names in constants file
             writer = new FileWriter("C:\\Users\\Robotics\\Documents\\2025Robot\\src\\main\\java\\frc\\robot\\auton\\auton1.csv", true);
         

@@ -6,7 +6,6 @@ package frc.robot;
 
 import frc.robot.commands.TeleOp;
 import frc.robot.commands.driveCommand;
-import frc.robot.commands.recordOp;
 import frc.robot.commands.auton;
 import frc.robot.subsystems.mecDrive;
 import frc.robot.subsystems.pneumatics;
@@ -25,8 +24,7 @@ public class RobotContainer {
   public static String autoFile = new String("auton1.csv");
 
   public final mecDrive m_MecDrive = new mecDrive();
-  private final recordOp m_RecordOp = new recordOp();
-  private final auton m_auton = new auton(m_MecDrive, null);
+  private final auton m_auton = new auton(m_MecDrive);
   private final pneumatics m_Pneumatics = new pneumatics();
 
 
@@ -39,7 +37,7 @@ public class RobotContainer {
   public RobotContainer() {
     // This is the absolute worst code I've ever written
     m_MecDrive.setDefaultCommand(new driveCommand(m_MecDrive, () -> Math.pow(stick1.getRawAxis(0) * .9, 3), () -> Math.pow(stick1.getRawAxis(1) * .9, 3), () -> -Math.pow((stick2.getRawAxis(0) * .9), 3)));
-    m_TeleOp = new TeleOp(stick1, stick2, m_MecDrive, m_RecordOp, m_Pneumatics);
+    m_TeleOp = new TeleOp(stick1, stick2, m_MecDrive, m_Pneumatics);
     configureBindings();
 
   }

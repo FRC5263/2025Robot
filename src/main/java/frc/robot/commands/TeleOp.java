@@ -4,10 +4,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.auton.recordAuton;
 import frc.robot.subsystems.mecDrive;
 import frc.robot.subsystems.pneumatics;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
+import java.io.IOException;
 
 import edu.wpi.first.wpilibj.Joystick;
 
@@ -15,17 +17,18 @@ public class TeleOp extends Command {
   public static Joystick stick1 = new Joystick(0);
   public static Joystick stick2 = new Joystick(1);
   mecDrive m_mecDrive;
-  recordOp m_recordOp;
   MecanumDrive m_drive;
   pneumatics m_Pneumatics;
+  public boolean isRecording = false;
+  public boolean isOperatorControl  = true;
+  recordAuton recorder = null;
 
 
-  public TeleOp(Joystick stick1, Joystick stick2, mecDrive m_mecDrive, recordOp m_recordOp, pneumatics m_Pneumatics) {
+  public TeleOp(Joystick stick1, Joystick stick2, mecDrive m_mecDrive, pneumatics m_Pneumatics) {
     // Use addRequirements() here to declare subsystem dependencies.
     TeleOp.stick1 = stick1;
     TeleOp.stick2 = stick2;
     this.m_mecDrive = m_mecDrive;
-    this.m_recordOp = m_recordOp;
     this.m_Pneumatics = m_Pneumatics;
   }
 
@@ -37,8 +40,6 @@ public class TeleOp extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_recordOp.isRecording = false;
-    m_recordOp.isOperatorControl  = true;
     // TODO: wrap the stick axis in their own vars so I don't have to change this logic everywhere and I don't have to debug THIS (and it'll look a bit prettier)
     // Deadzones for a given direction
     if(Math.pow((Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0)) * .9), 3) < .301 && Math.pow((Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0)) * .9), 3) > -.301){
@@ -67,12 +68,32 @@ public class TeleOp extends Command {
 
 
     if(stick1.getRawButton(4)){
-      m_recordOp.isRecording = true;
+      isRecording = true;
     }
     if(stick1.getRawButton(5)){
-      m_recordOp.isRecording = false;
+      isRecording = false;
     }
-    m_recordOp.operatorControl();
+
+    // Moved all of recordOp
+    try {
+      recorder = new recordAuton();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    while(isOperatorControl){
+      isRecording = !isRecording;
+    }
+    if(isRecording){
+      try {
+        recorder.record();
+      } catch (Exception e) { e.printStackTrace(); }
+    }
+  
+    try{
+      if(recorder != null){
+    			recorder.end();
+    		}
+		} catch(IOException e){ e.printStackTrace(); }
   }
 
 

@@ -15,11 +15,10 @@ import frc.robot.subsystems.mecDrive;
 
 
 public class auton extends Command {
-  playAuton player = null;
   mecDrive mecdrive;
-    public auton(mecDrive m_MecDrive, playAuton m_auton){
+  playAuton player;
+    public auton(mecDrive m_MecDrive){
         mecdrive = m_MecDrive;
-        player = m_auton;
     }
 
   @Override
