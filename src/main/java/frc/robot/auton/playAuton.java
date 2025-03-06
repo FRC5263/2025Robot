@@ -23,7 +23,7 @@ public class playAuton{
     double nextDouble;
 
     public playAuton() throws FileNotFoundException{
-        scanner = new Scanner(new FileReader("C:\\Users\\Robotics\\Documents\\2025Robot\\src\\main\\java\\frc\\robot\\auton\\auton1.csv"));
+        scanner = new Scanner(new FileReader("auton1.csv"));
         scanner.useDelimiter(",");
         startTime = System.currentTimeMillis();
     }
