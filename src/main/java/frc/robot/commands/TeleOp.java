@@ -6,7 +6,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.auton.recordAuton;
 import frc.robot.subsystems.mecDrive;
-import frc.robot.subsystems.pneumatics;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
 import java.io.IOException;
@@ -18,18 +17,16 @@ public class TeleOp extends Command {
   public static Joystick stick2 = new Joystick(1);
   mecDrive m_mecDrive;
   MecanumDrive m_drive;
-  pneumatics m_Pneumatics;
   public boolean isRecording = false;
   public boolean isOperatorControl  = true;
   recordAuton recorder = null;
 
 
-  public TeleOp(Joystick stick1, Joystick stick2, mecDrive m_mecDrive, pneumatics m_Pneumatics) {
+  public TeleOp(Joystick stick1, Joystick stick2, mecDrive m_mecDrive) {
     // Use addRequirements() here to declare subsystem dependencies.
     TeleOp.stick1 = stick1;
     TeleOp.stick2 = stick2;
     this.m_mecDrive = m_mecDrive;
-    this.m_Pneumatics = m_Pneumatics;
   }
 
   // Called when the command is initially scheduled.
@@ -56,16 +53,6 @@ public class TeleOp extends Command {
     }
     m_drive.driveCartesian(-Math.pow((Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0)) * .9), 3), Math.pow((Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1) * .9)), 3), -stick2.getRawAxis(0));
     m_drive.feed();
-
-    // I do not know what this does
-    // TODO: Mallek please make this work :(
-    if(stick1.getRawButton(1)){
-      m_Pneumatics.compressorUpTop();
-    }
-    if(stick1.getRawButton(2)){
-      m_Pneumatics.compressorDownTop();
-    }
-
 
     if(stick1.getRawButton(4)){
       isRecording = true;
