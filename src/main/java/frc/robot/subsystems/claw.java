@@ -17,6 +17,5 @@ public class claw extends SubsystemBase {
         Wrist = new SparkMax(Constants.WristID, MotorType.kBrushless);
         intake1 = new SparkMax(Constants.intake1_ID, MotorType.kBrushless);
         intake2 = new SparkMax(Constants.intake2_ID, MotorType.kBrushless);
-
     }
 }
