@@ -21,37 +21,22 @@ public class claw extends SubsystemBase {
         invertConfig = new SparkMaxConfig();
         notinvertConfig = new SparkMaxConfig();
 
-    invertConfig.inverted(true);
+   
         notinvertConfig.inverted(false);
         
  
 
     }
-    // this method sucks terribly, but again its java.
-   /* (i don't think this is gonna work by logic) public void invert(){
-        Wrist.configure(invertConfig, null, null);
-        intake_alg.configure(invertConfig, null, null);
-        intake_coral.configure(invertConfig, null, null);
-    }
-        */
-    public void Wristinvert(){
-        Wrist.configure(invertConfig, null, null);
-    }
-    public void Alginvert(){
-        intake_alg.configure(invertConfig, null, null);
-    }
-    public void Coralinvert(){
-        intake_coral.configure(invertConfig, null, null);
-    }
-    public void deWristinvert(){
-        Wrist.configure(notinvertConfig, null, null);
-    }
-    public void deAlginvert(){
-        intake_alg.configure(notinvertConfig, null, null);
-    }
-    public void deCoralinvert(){
-        intake_coral.configure(notinvertConfig, null, null);
-    }
+
+   //this method is terrible but i kinda have to since i hate clutter specificly in TeleOp
+    public void Wristinvert(){ Wrist.configure(invertConfig, null, null); }
+    public void Alginvert(){intake_alg.configure(invertConfig, null, null);}
+    public void Coralinvert(){intake_coral.configure(invertConfig, null, null);}
+    public void deWristinvert(){  Wrist.configure(notinvertConfig, null, null);}
+    public void deAlginvert(){intake_alg.configure(notinvertConfig, null, null);}
+    public void deCoralinvert(){intake_coral.configure(notinvertConfig, null, null);}
+    public void Algstop(){intake_alg.set(0);}
+    public void Coralstop(){intake_coral.set(0);}
 
 }
 
