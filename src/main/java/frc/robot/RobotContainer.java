@@ -8,7 +8,7 @@ import frc.robot.commands.TeleOp;
 import frc.robot.commands.driveCommand;
 import frc.robot.commands.auton;
 import frc.robot.subsystems.mecDrive;
-import frc.robot.subsystems.claw;
+import frc.robot.subsystems.intake;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -27,7 +27,7 @@ public class RobotContainer {
   
   private final auton m_auton = new auton(m_MecDrive);
 
-  private final claw m_Claw = new claw();
+  private final intake m_Intake = new intake();
 
   private final Command m_TeleOp;
 
@@ -39,7 +39,7 @@ public class RobotContainer {
   public RobotContainer() {
     // This is the absolute worst code I've ever written
     m_MecDrive.setDefaultCommand(new driveCommand(m_MecDrive, () -> Math.pow(stick1.getRawAxis(0) * .9, 3), () -> Math.pow(stick1.getRawAxis(1) * .9, 3), () -> -Math.pow((stick2.getRawAxis(0) * .9), 3)));
-    m_TeleOp = new TeleOp(stick1, stick2,stick3, m_MecDrive,m_Claw);
+    m_TeleOp = new TeleOp(stick1, stick2,stick3, m_MecDrive,m_Intake);
     configureBindings();
 
   }

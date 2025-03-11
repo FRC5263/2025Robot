@@ -17,6 +17,5 @@ public final class Constants {
   public static final int backLeftID = CANID[2];
   public static final int frontLeftID = CANID[3];
   public static final int WristID = CANID[4];
-  public static final int intake1_ID = CANID[5];
-  public static final int intake2_ID = CANID[6];
+
 }

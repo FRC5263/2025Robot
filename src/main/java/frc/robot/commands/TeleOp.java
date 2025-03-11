@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.auton.recordAuton;
 import frc.robot.subsystems.mecDrive;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
-import frc.robot.subsystems.claw;
+import frc.robot.subsystems.intake;
 
 import java.io.IOException;
 
@@ -19,19 +19,19 @@ public class TeleOp extends Command {
   public static Joystick stick3 = new Joystick(1);
   mecDrive m_mecDrive;
   MecanumDrive m_drive;
-  claw m_Claw;
+  intake m_Intake;
   public boolean isRecording = false;
   public boolean isOperatorControl  = true;
   recordAuton recorder = null;
 
 
-  public TeleOp(Joystick stick1, Joystick stick2,Joystick stick3, mecDrive m_mecDrive,claw m_Claw) {
+  public TeleOp(Joystick stick1, Joystick stick2,Joystick stick3, mecDrive m_mecDrive,intake m_Intake) {
     // Use addRequirements() here to declare subsystem dependencies.
     TeleOp.stick1 = stick1;
     TeleOp.stick2 = stick2;
     TeleOp.stick3 = stick3;
     this.m_mecDrive = m_mecDrive;
-    this.m_Claw = m_Claw;
+    this.m_Intake = m_Intake;
   }
 
   // Called when the command is initially scheduled.
@@ -59,45 +59,21 @@ public class TeleOp extends Command {
     }
     m_drive.driveCartesian(-Math.pow((Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0)) * .9), 3), Math.pow((Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1) * .9)), 3), -stick2.getRawAxis(0));
     m_drive.feed();
+
+
     
 
       //wrist
       if(stick3.getRawAxis(1)< -0.11){
-        m_Claw.deWristinvert();
-        claw.Wrist.set((-stick3.getRawAxis(1) * -0.8));
+        m_Intake.falseinvert();
+        intake.Intake.set((stick3.getRawAxis(1)*-0.6));
       }
       if(stick3.getRawAxis(1)> 0.11){
-        m_Claw.Wristinvert();
-        claw.Wrist.set((stick3.getRawAxis(1) * 0.8));
+        m_Intake.invert();
+        intake.Intake.set((stick3.getRawAxis(1) * 0.6));
+  
         
       }
-      //Coral
-      if(stick3.getRawButtonPressed(1)){
-       // (test) m_Claw.Coralinvert();
-        m_Claw.deCoralinvert();
-         claw.intake_coral.set(0.3);
-      }
-      if(stick3.getRawButtonPressed(2)){
-        m_Claw.Coralinvert(); 
-        claw.intake_coral.set(0.3);
-      }
-        if(stick3.getRawButtonReleased(1)){
-          m_Claw.Coralstop();
-        }
-
-
-
-        //Algae
-        if(stick3.getRawButtonPressed(3)){
-          m_Claw.deAlginvert(); 
-          claw.intake_alg.set(0.3);
-        }
-        if(stick3.getRawButtonPressed(5)){
-          m_Claw.Alginvert();
-          claw.intake_alg.set(0.3);
-        }
-        if(stick3.getRawButtonReleased(3) && stick3.getRawButtonReleased(5)){m_Claw.Algstop();}
-       
 
 
     if(stick1.getRawButton(4)){
