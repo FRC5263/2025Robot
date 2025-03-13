@@ -31,7 +31,7 @@ public class driveCommand extends Command{
   }
 
   public void execute(){
-    mecDrive.drive(-y.getAsDouble(), -x.getAsDouble(), -z.getAsDouble());
+    mecDrive.drive(-x.getAsDouble(), -y.getAsDouble(), -z.getAsDouble());
   }
 
   public boolean isFinished(){

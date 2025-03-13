@@ -40,19 +40,19 @@ public class TeleOp extends Command {
     // TODO: wrap the stick axis in their own vars so I don't have to change this logic everywhere and I don't have to debug THIS (and it'll look a bit prettier)
     // Deadzones for a given direction
     if(Math.pow((Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0)) * .9), 3) < .301 && Math.pow((Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0)) * .9), 3) > -.301){
-        m_drive.driveCartesian(0, Math.pow((Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1) * .9)), 3), -stick2.getRawAxis(0));     // X deadzones
-        m_drive.feed();
+      m_drive.driveCartesian(0, Math.pow((stick1.getRawAxis(0) * .9), 3), -Math.pow((-stick2.getRawAxis(0) * .9), 3));
+      m_drive.feed();
     }
     if(Math.pow((Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1)) * .9), 3) < .301 && Math.pow((Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1)) * .9), 3) > -.301){
-      m_drive.driveCartesian(-Math.pow((Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0)) * .9), 3), 0, -stick2.getRawAxis(0));      // Y deadzones
+      m_drive.driveCartesian(-Math.pow((stick1.getRawAxis(1) * .9), 3), 0, -Math.pow((-stick2.getRawAxis(0) * .9), 3));
       m_drive.feed();
       
     }
     if(stick2.getRawAxis(0) < .301 && stick2.getRawAxis(0) > -.301){
-      m_drive.driveCartesian(-Math.pow((Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0)) * .9), 3), Math.pow((Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1) * .9)), 3), 0);     // Z deadzones
+      m_drive.driveCartesian(-Math.pow((stick1.getRawAxis(1) * .9), 3), Math.pow((stick1.getRawAxis(0) * .9), 3), 0);
       m_drive.feed();
     }
-    m_drive.driveCartesian(-Math.pow((Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0)) * .9), 3), Math.pow((Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1) * .9)), 3), -stick2.getRawAxis(0));
+    m_drive.driveCartesian(-Math.pow((stick1.getRawAxis(1) * .9), 3), Math.pow((stick1.getRawAxis(0) * .9), 3), -Math.pow((-stick2.getRawAxis(0) * .9), 3));
     m_drive.feed();
 
     if(stick1.getRawButton(4)){

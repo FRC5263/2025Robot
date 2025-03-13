@@ -38,9 +38,6 @@ public class mecDrive extends SubsystemBase{
                 .inverted(true);
 
         // Invert motors on one side
-        frontRight.configure(rightMaxConfig, null, null);
-        rearRight.configure(rightMaxConfig, null, null);
-        rearLeft.setInverted(true);
         System.out.print("Motor configuration set\n");
         
         // Init
@@ -50,7 +47,6 @@ public class mecDrive extends SubsystemBase{
     }
 
     public static void drive(double ySpeed, double xSpeed, double zRotation) {
-        mecanumDrive.driveCartesian(ySpeed, xSpeed, zRotation);
-        mecanumDrive.feed();    // I don't know what this does or why it needs this but RioLog bitches at me whenever I don't have it
+        mecanumDrive.driveCartesian(ySpeed, xSpeed, zRotation);    
     }
 }
