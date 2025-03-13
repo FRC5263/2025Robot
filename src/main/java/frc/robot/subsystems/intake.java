@@ -14,7 +14,7 @@ public class intake extends SubsystemBase {
     
     public intake(){
     
-        Intake = new SparkMax(Constants.WristID,MotorType.kBrushless);
+        Intake = new SparkMax(Constants.IntakeID,MotorType.kBrushless);
         invertConfig = new SparkMaxConfig();
         notinvertConfig = new SparkMaxConfig();
  

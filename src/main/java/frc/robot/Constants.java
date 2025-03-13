@@ -11,11 +11,11 @@ public final class Constants {
    * More to come
    * There's no 0-indexing on the CAN IDs >:(
    */
-  public static final int CANID[] = {2, 3, 4, 5, 6, 7 , 8};
+  public static final int CANID[] = {2, 3, 4, 5, 6, 7 ,8};
   public static final int frontRightID = CANID[0];
   public static final int backRightID = CANID[1];
   public static final int backLeftID = CANID[2];
   public static final int frontLeftID = CANID[3];
-  public static final int WristID = CANID[4];
+  public static final int IntakeID = CANID[5];
 
 }
