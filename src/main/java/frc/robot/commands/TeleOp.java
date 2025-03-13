@@ -46,7 +46,6 @@ public class TeleOp extends Command {
     if(Math.pow((Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1)) * .9), 3) < .301 && Math.pow((Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1)) * .9), 3) > -.301){
       m_drive.driveCartesian(-Math.pow((Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0)) * .9), 3), 0, -stick2.getRawAxis(0));      // Y deadzones
       m_drive.feed();
-      
     }
     if(stick2.getRawAxis(0) < .301 && stick2.getRawAxis(0) > -.301){
       m_drive.driveCartesian(-Math.pow((Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0)) * .9), 3), Math.pow((Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1) * .9)), 3), 0);     // Z deadzones
