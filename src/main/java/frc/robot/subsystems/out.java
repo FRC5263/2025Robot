@@ -12,14 +12,10 @@ import frc.robot.Constants;
 
 public class out extends SubsystemBase {
   /** Creates a new out. */
-
-  public static SparkMax outMotor;
-
+  public SparkMax outMotor;
   public out() {
     outMotor = new SparkMax(Constants.intake1_ID, MotorType.kBrushless);
-    System.err.print("Out motor initalized\n");
   }
-
 
   public void run(double power) {
     outMotor.set(power);
