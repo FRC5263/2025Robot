@@ -42,7 +42,7 @@ public class mecDrive extends SubsystemBase{
         
         // Init
         mecanumDrive = new MecanumDrive(frontLeft, rearLeft, frontRight, rearRight);
-        System.out.print("Drive cartesian initalized");
+        System.out.print("Drive cartesian initalized\n");
         mecanumDrive.setSafetyEnabled(false);
     }
 

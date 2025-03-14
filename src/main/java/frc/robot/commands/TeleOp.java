@@ -6,9 +6,8 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.auton.recordAuton;
 import frc.robot.subsystems.mecDrive;
+import frc.robot.subsystems.out;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
-
-import java.io.IOException;
 
 import edu.wpi.first.wpilibj.Joystick;
 
@@ -16,22 +15,26 @@ public class TeleOp extends Command {
   public static Joystick stick1 = new Joystick(0);
   public static Joystick stick2 = new Joystick(1);
   mecDrive m_mecDrive;
+  out m_outMotor;
   MecanumDrive m_drive;
+  double outPower;
   public boolean isRecording = false;
   public boolean isOperatorControl  = true;
   recordAuton recorder = null;
 
 
-  public TeleOp(Joystick stick1, Joystick stick2, mecDrive m_mecDrive) {
+  public TeleOp(Joystick stick1, Joystick stick2, mecDrive m_mecDrive, out m_outMotor) {
     // Use addRequirements() here to declare subsystem dependencies.
     TeleOp.stick1 = stick1;
     TeleOp.stick2 = stick2;
+    this.m_outMotor = m_outMotor;
     this.m_mecDrive = m_mecDrive;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    outPower = 0.0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -53,35 +56,10 @@ public class TeleOp extends Command {
       m_drive.feed();
     }
     m_drive.driveCartesian(-Math.pow((stick1.getRawAxis(1) * .9), 3), Math.pow((stick1.getRawAxis(0) * .9), 3), -Math.pow((-stick2.getRawAxis(0) * .9), 3));
-    m_drive.feed();
 
-    if(stick1.getRawButton(4)){
-      isRecording = true;
+    if(stick1.getRawButton(1)){
+      m_outMotor.run(1);
     }
-    if(stick1.getRawButton(5)){
-      isRecording = false;
-    }
-
-    // Moved all of recordOp
-    try {
-      recorder = new recordAuton();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    while(isOperatorControl){
-      isRecording = !isRecording;
-    }
-    if(isRecording){
-      try {
-        recorder.record();
-      } catch (Exception e) { e.printStackTrace(); }
-    }
-  
-    try{
-      if(recorder != null){
-    			recorder.end();
-    		}
-		} catch(IOException e){ e.printStackTrace(); }
   }
 
 
