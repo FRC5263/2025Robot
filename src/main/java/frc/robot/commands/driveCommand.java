@@ -5,9 +5,11 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.subsystems.mecDrive;
 import edu.wpi.first.wpilibj.Joystick;
 import java.util.function.DoubleSupplier;
+import frc.robot.RobotContainer;
 
 
 /* Hello all continuous years in FRC5263
@@ -21,28 +23,30 @@ public class driveCommand extends Command{
   private DoubleSupplier x;
   private DoubleSupplier y;
   private DoubleSupplier z;
+  
 
-  public driveCommand(mecDrive driveSubsystem, DoubleSupplier x, DoubleSupplier y, DoubleSupplier z){
+  public driveCommand(mecDrive driveSubsystem, DoubleSupplier x, DoubleSupplier y, DoubleSupplier z,boolean run){
     m_drive = driveSubsystem;
     this.z = z;
     this.y = y;
     this.x = x;
+    
     addRequirements(m_drive);
   }
+  
 
   public void execute(){
     mecDrive.drive(-x.getAsDouble(), -y.getAsDouble(), -z.getAsDouble());
+
   }
 
   public boolean isFinished(){
     return false;
   }
 
-  public void end(){
-    mecDrive.drive(0.0, 0.0, 0.0);
+  @Override
+  public void end(boolean interrupted){
+        mecDrive.drive(0.0, 0.0, 0.0);
   }
-
-  public void interrupted(){
-    end();
-  }
+  
 }

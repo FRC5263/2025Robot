@@ -31,13 +31,6 @@ public class mecDrive extends SubsystemBase{
         frontLeft = new SparkMax(Constants.frontLeftID, MotorType.kBrushless);
         System.out.print("Front left motor initalized with ID 5\n");
         rightMaxConfig = new SparkMaxConfig();
-
-        // This is a really dumb method for smaller args like this
-        // Just thought I'd share
-        rightMaxConfig
-                .inverted(true);
-
-        // Invert motors on one side
         System.out.print("Motor configuration set\n");
         
         // Init
