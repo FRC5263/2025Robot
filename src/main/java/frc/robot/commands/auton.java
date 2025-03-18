@@ -13,6 +13,21 @@ import frc.robot.subsystems.mecDrive;
  * This just wraps the auton play method into a command runnable by the recordOp file
  */
 
+ // (Keeping this in auton file so I remember what to do to connect Uno to RIO)
+ 
+ // TODO: SSH into RIO and run "ls /dev | grep ttyUSB"
+ // then connect over USB if serial is possible
+ 
+ // OR: go to RS-232 serial port on the left side (under CAN bus out) and connect:
+ // RIO GND -> Uno GND
+ // RIO TXS -> Uno RXD
+ // RIO RXD -> Uno TXD
+
+ //OR: ethernet
+
+ // TODO: I LIED DO NOT USE THESE METHODS CONNECT OVER CAN BUS
+
+ 
 
 public class auton extends Command {
   mecDrive mecdrive;
@@ -26,14 +41,14 @@ public class auton extends Command {
 
   @Override
   public void execute() {
-        try {
-            player = new playAuton();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if(player != null){
-            player.play();
-    }
+    try {
+      player = new playAuton();
+   } catch (Exception e) {
+     e.printStackTrace();
+     }
+     if(player != null){
+         player.play();
+ }
   }
 
   // Called once the command ends or is interrupted.

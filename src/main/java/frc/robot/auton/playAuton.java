@@ -5,6 +5,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.mecDrive;
 
 
@@ -15,16 +16,18 @@ import frc.robot.subsystems.mecDrive;
  */
 
 
-public class playAuton{
+public class playAuton extends Command {
     public Scanner scanner;
     long startTime;
     boolean onTime = true;
     MecanumDrive m_drive;
     double nextDouble;
 
-    public playAuton() throws FileNotFoundException{
-        scanner = new Scanner(new FileReader("auton1.csv"));
-        scanner.useDelimiter(",");
+    public playAuton() throws FileNotFoundException, NullPointerException{
+        try (Scanner scanner = new Scanner(new FileReader("/home/lvuser/frc/auton1.csv"))) {
+            scanner.useDelimiter(",");
+        }
+        catch(Exception e){ System.out.println("shit's fucked"); e.printStackTrace(); }
         startTime = System.currentTimeMillis();
     }
     public void play() throws InputMismatchException{
@@ -43,27 +46,20 @@ public class playAuton{
             }
             deltaTime = nextDouble - (System.currentTimeMillis() - startTime);
             if(deltaTime <= 0){
-                mecDrive.frontRight.set(scanner.nextDouble());
-                mecDrive.rearRight.set(scanner.nextDouble());
-                mecDrive.rearLeft.set(scanner.nextDouble());
-                mecDrive.frontLeft.set(scanner.nextDouble());
-                m_drive.feed();
+                mecDrive.drive(scanner.nextDouble(), scanner.nextDouble(), scanner.nextDouble());
                 onTime = true;
             }
-            else{onTime = false;}
+            else{onTime = false;  System.out.println("Robot not on time!");   }
         }
         else{
             if(scanner != null){
-                scanner.close();
-                end();
+                scanner.close();               
+                 end();
             }
         }
     }
     public void end(){
-        mecDrive.frontRight.set(0.0);
-        mecDrive.rearRight.set(0.0);
-        mecDrive.rearLeft.set(0.0);
-        mecDrive.frontLeft.set(0.0);
+        mecDrive.drive(0.0, 0.0, 0.0);
 
         if(scanner != null){
             scanner.close();
