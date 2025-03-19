@@ -45,16 +45,12 @@ public class TeleOp extends Command {
     // Deadzones for a given direction
     if(Math.pow((Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0)) * .9), 3) < .301 && Math.pow((Math.atan2(stick1.getRawAxis(1), stick1.getRawAxis(0)) * .9), 3) > -.301){
       m_drive.driveCartesian(0, -Math.pow((stick1.getRawAxis(0) * .9), 3), -Math.pow((-stick2.getRawAxis(0) * .9), 3));
-      m_drive.feed();
     }
     if(Math.pow((Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1)) * .9), 3) < .301 && Math.pow((Math.hypot(stick1.getRawAxis(0), stick1.getRawAxis(1)) * .9), 3) > -.301){
       m_drive.driveCartesian(Math.pow((stick1.getRawAxis(1) * .9), 3), 0, -Math.pow((-stick2.getRawAxis(0) * .9), 3));
-      m_drive.feed();
-      
     }
     if(stick2.getRawAxis(0) < .301 && stick2.getRawAxis(0) > -.301){
       m_drive.driveCartesian(Math.pow((stick1.getRawAxis(1) * .9), 3), -Math.pow((stick1.getRawAxis(0) * .9), 3), 0);
-      m_drive.feed();
     }
     m_drive.driveCartesian(Math.pow((stick1.getRawAxis(1) * .9), 3), -Math.pow((stick1.getRawAxis(0) * .9), 3), -Math.pow((-stick2.getRawAxis(0) * .9), 3));
 

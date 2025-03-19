@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.subsystems.mecDrive;
 
 /* Auton begins here
@@ -19,8 +20,7 @@ public class recordAuton extends Command{
     public recordAuton() {}
     public void record() throws IOException{
         startTime = System.currentTimeMillis();
-            // TODO: automate file names in constants file
-            file = new File("/home/lvuser/frc/auton1.csv");
+            file = new File(Constants.pathName);
             writer = new FileWriter(file, true);
         
         writer.append("" + (System.currentTimeMillis() - startTime));

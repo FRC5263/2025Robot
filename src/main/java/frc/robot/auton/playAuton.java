@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.subsystems.mecDrive;
 
 
@@ -24,7 +25,7 @@ public class playAuton extends Command {
     double nextDouble;
 
     public playAuton() throws FileNotFoundException, NullPointerException{
-        try (Scanner scanner = new Scanner(new FileReader("/home/lvuser/frc/auton1.csv"))) {
+        try (Scanner scanner = new Scanner(new FileReader(Constants.pathName))) {
             scanner.useDelimiter(",");
         }
         catch(Exception e){ System.out.println("shit's fucked"); e.printStackTrace(); }

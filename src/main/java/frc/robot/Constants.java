@@ -17,4 +17,6 @@ public final class Constants {
   public static final int backLeftID = CANID[2];
   public static final int frontLeftID = CANID[3];
   public static final int intake1_ID = CANID[4];
+
+  public static final String pathName = "/home/lvuser/frc/auton1.csv";
 }

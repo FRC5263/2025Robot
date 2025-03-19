@@ -57,10 +57,10 @@ public class RobotContainer {
         CommandBasedStick1.button(2).whileTrue(m_record);
     }
   
-    public Command getTeleOpCommand(){
+    /*public Command getTeleOpCommand(){
       return m_TeleOp;
   
-    }
+    } */
   
     public Command getAutonomousCommand() {
       return m_auton;
