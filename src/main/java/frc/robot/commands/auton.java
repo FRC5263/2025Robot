@@ -17,15 +17,7 @@ import frc.robot.subsystems.mecDrive;
  
  // TODO: SSH into RIO and run "ls /dev | grep ttyUSB"
  // then connect over USB if serial is possible
- 
- // OR: go to RS-232 serial port on the left side (under CAN bus out) and connect:
- // RIO GND -> Uno GND
- // RIO TXS -> Uno RXD
- // RIO RXD -> Uno TXD
-
- //OR: ethernet
-
- // TODO: I LIED DO NOT USE THESE METHODS CONNECT OVER CAN BUS
+ // or CAN bus
 
  
 
