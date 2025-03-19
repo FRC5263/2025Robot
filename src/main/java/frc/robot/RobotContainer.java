@@ -8,9 +8,11 @@ import frc.robot.auton.recordAuton;
 import frc.robot.commands.TeleOp;
 import frc.robot.commands.driveCommand;
 import frc.robot.commands.intakeControl;
+import frc.robot.commands.clawCommand;
 import frc.robot.commands.auton;
 import frc.robot.subsystems.intakeSubsystem;
 import frc.robot.subsystems.mecDrive;
+import frc.robot.subsystems.clawSubsystem;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -29,6 +31,8 @@ public class RobotContainer {
   public final mecDrive m_MecDrive = new mecDrive();
 
   public final intakeSubsystem intakeMotor = new intakeSubsystem();
+
+  public final clawSubsystem clawMotor = new clawSubsystem();
   
   private final auton m_auton = new auton(m_MecDrive);
   private final recordAuton m_record = new recordAuton();
@@ -40,6 +44,7 @@ public class RobotContainer {
   private final Joystick stick1 = new Joystick(0);
   private final Joystick stick2 = new Joystick(1);
   private final CommandJoystick CommandBasedStick1 = new CommandJoystick(0);
+  private final CommandJoystick CommandBasedStick2 = new CommandJoystick(1);
   
     public RobotContainer() {
       // This is the absolute worst code I've ever written
@@ -52,6 +57,7 @@ public class RobotContainer {
   // this is important. don delete this under any circumstances
     private void configureBindings() {
       CommandBasedStick1.button(1).whileTrue(new intakeControl(intakeMotor, 1.0));
+      CommandBasedStick2.button(2).whileTrue(new clawCommand(1.0,clawMotor));
       //CommandBasedStick1.button(2).whileTrue(new recordAuton());
 
         CommandBasedStick1.button(2).whileTrue(m_record);
