@@ -23,7 +23,7 @@ public class clawCommand extends Command {
        claw.clawSpeed(0);
     }
         
-
+@Override
 public boolean isFinished(){
     return false;
 }
