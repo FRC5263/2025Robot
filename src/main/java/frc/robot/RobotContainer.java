@@ -8,7 +8,6 @@ import frc.robot.auton.recordAuton;
 import frc.robot.commands.driveCommand;
 import frc.robot.commands.intakeIn;
 import frc.robot.commands.intakeOut;
-import frc.robot.commands.auton;
 import frc.robot.commands.climberCommand;
 import frc.robot.subsystems.climberSubsystem;
 import frc.robot.subsystems.intakeSubsystem;
@@ -16,14 +15,15 @@ import frc.robot.subsystems.mecDrive;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
+import frc.robot.auton.autonBad;
 
 /**
  * This class is where the bulk of the robot should be declared. Very little robot logic should actually be handled here
  * Instead, the structure of the robot (including subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
-  // Every used object declared here
   
   public static final int autoNumber = 1;
 
@@ -33,8 +33,9 @@ public class RobotContainer {
   private final intakeSubsystem intakeMotor = new intakeSubsystem();
 
   private final climberSubsystem climber = new climberSubsystem();
+
   
-  private final auton m_auton = new auton(m_MecDrive);
+  private final autonBad m_auton = new autonBad(m_MecDrive);
   private final recordAuton m_record = new recordAuton();
 
 
@@ -62,6 +63,6 @@ public class RobotContainer {
     public Command getAutonomousCommand() {
       return m_auton;
       
-      // return Commands.run(()->mecDrive.drive(1, 0, 0)).andThen(Commands.waitSeconds(2.5).andThen(()->mecDrive.drive(0, 0, 0)));
+      //return Commands.run(()->mecDrive.drive(1, 0, 0)).andThen(Commands.waitSeconds(2.5).andThen(()->mecDrive.drive(0, 0, 0)));
 }
 }
