@@ -6,6 +6,7 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class mecDrive extends SubsystemBase{
     public static SparkMax frontLeft;
@@ -40,10 +41,16 @@ public class mecDrive extends SubsystemBase{
         }
     
         public static void drive(double ySpeed, double xSpeed, double zRotation) {
-            mecanumDrive.driveCartesian(ySpeed, xSpeed, zRotation);    
+            mecanumDrive.driveCartesian(ySpeed, xSpeed, zRotation);
             speedY = ySpeed;
             speedX = xSpeed;
             speedZ = zRotation;
+    }
+    @Override
+    public void periodic(){
+        SmartDashboard.putNumber("Forward(ySpeed)", getYspeed());
+        SmartDashboard.putNumber("Strafe(xSpeed)", getXspeed());
+        SmartDashboard.putNumber("Rotation(zRotation)", getZspeed());
     }
     public static double getYspeed(){
         return speedY;
