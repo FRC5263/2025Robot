@@ -57,7 +57,7 @@ public class RobotContainer {
 
       CommandBasedStick1.button(3).whileTrue(new climberCommand(climber, 1));
 
-      CommandBasedStick1.button(4).whileTrue(m_record);
+      //CommandBasedStick1.button(4).whileTrue(m_record);
     }
   
     public Command getAutonomousCommand() {
