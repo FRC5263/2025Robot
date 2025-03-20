@@ -29,12 +29,6 @@ public class Robot extends TimedRobot {
 
   private final RobotContainer m_robotContainer;
 
- @SuppressWarnings("unused")
-private Command m_teleOpCommand;
-
-  /**
-   * Renamed version of InitRobot
-   */
   public Robot() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.

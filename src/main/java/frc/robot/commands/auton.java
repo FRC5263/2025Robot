@@ -15,7 +15,7 @@ import frc.robot.subsystems.mecDrive;
 
  // (Keeping this in auton file so I remember what to do to connect Uno to RIO)
  
- // TODO: SSH into RIO and run "ls /dev | grep ttyUSB"
+ // SSH into RIO and run "ls /dev | grep ttyUSB"
  // then connect over USB if serial is possible
  // or CAN bus
 

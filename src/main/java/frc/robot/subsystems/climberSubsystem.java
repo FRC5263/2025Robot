@@ -6,28 +6,29 @@ package frc.robot.subsystems;
 
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
-import frc.robot.Constants;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
-public class intakeSubsystem extends SubsystemBase {
-  private boolean intakeOn = false;
-  private SparkMax intake;
-  public intakeSubsystem() {
-    intake = new SparkMax(Constants.intake1_ID, MotorType.kBrushless);
+public class climberSubsystem extends SubsystemBase {
+  private boolean ClimberOn = false;
+  private SparkMax climber;
+  public climberSubsystem() {
+    climber = new SparkMax(Constants.climberID, MotorType.kBrushless);
   }
 
-  public void ySpeed(double power){
-    intake.set(power);
+  public void climb(double power){
+    climber.set(power);
   }
 
   @Override
   public void periodic() {}
 
-  public void toggleIntake(){
-    intakeOn = !intakeOn;
+  public void toggleClimber(){
+    ClimberOn = !ClimberOn;
   }
-  public boolean getIntakeOn(){
-    return intakeOn;
+  
+  public boolean getClimberOn(){
+    return ClimberOn;
   }
 }
