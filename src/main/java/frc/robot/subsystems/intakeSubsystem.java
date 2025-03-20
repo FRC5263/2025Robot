@@ -13,8 +13,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class intakeSubsystem extends SubsystemBase {
   private boolean intakeOn = false;
   private SparkMax intake;
-  private String key = "intake going out";
-  private String keyIn = "intake going in";
   public intakeSubsystem() {
     intake = new SparkMax(Constants.intake1_ID, MotorType.kBrushless);
   }
@@ -25,16 +23,7 @@ public class intakeSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    if(intake.get() > 0.0){
-    SmartDashboard.putNumber(key, intake.get());
-    } else{
-      if(intake.get() < 0.0){
-        SmartDashboard.putNumber(keyIn, intake.get());
-      }
-      else{
-        SmartDashboard.putNumber("intake", 0);
-      }
-    }
+    SmartDashboard.putNumber("Intake", intake.get());
   }
 
   public void toggleIntake(){
