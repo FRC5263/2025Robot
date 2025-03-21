@@ -14,11 +14,12 @@ import frc.robot.Constants;
 public class climberSubsystem extends SubsystemBase {
   private boolean ClimberOn = false;
   private SparkMax climber;
+
   public climberSubsystem() {
     climber = new SparkMax(Constants.climberID, MotorType.kBrushless);
   }
 
-  public void climb(double power){
+  public void climb(double power) {
     climber.set(power);
   }
 
@@ -27,11 +28,11 @@ public class climberSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Climber", climber.get());
   }
 
-  public void toggleClimber(){
+  public void toggleClimber() {
     ClimberOn = !ClimberOn;
   }
-  
-  public boolean getClimberOn(){
+
+  public boolean getClimberOn() {
     return ClimberOn;
   }
 }

@@ -10,13 +10,15 @@ import frc.robot.subsystems.climberSubsystem;
 public class climberCommand extends Command {
   climberSubsystem climber;
   double ySpeed;
+
   public climberCommand(climberSubsystem climber, double ySpeed) {
     this.climber = climber;
     this.ySpeed = ySpeed;
   }
 
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   @Override
   public void execute() {

@@ -13,6 +13,7 @@ public class autonBad extends Command {
   Timer m_timer;
   long startTime;
   long elapsedTime;
+
   public autonBad(mecDrive drive) {
     this.m_drive = drive;
     m_timer = new Timer();
@@ -31,7 +32,8 @@ public class autonBad extends Command {
   }
 
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+  }
 
   @Override
   public boolean isFinished() {

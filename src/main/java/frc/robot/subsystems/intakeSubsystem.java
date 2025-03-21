@@ -13,11 +13,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class intakeSubsystem extends SubsystemBase {
   private boolean intakeOn = false;
   private SparkMax intake;
+
   public intakeSubsystem() {
     intake = new SparkMax(Constants.intake1_ID, MotorType.kBrushless);
   }
 
-  public void ySpeed(double power){
+  public void ySpeed(double power) {
     intake.set(power);
   }
 
@@ -26,10 +27,11 @@ public class intakeSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Intake", intake.get());
   }
 
-  public void toggleIntake(){
+  public void toggleIntake() {
     intakeOn = !intakeOn;
   }
-  public boolean getIntakeOn(){
+
+  public boolean getIntakeOn() {
     return intakeOn;
   }
 }

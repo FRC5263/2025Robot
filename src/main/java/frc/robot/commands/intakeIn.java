@@ -10,6 +10,7 @@ import frc.robot.subsystems.intakeSubsystem;
 public class intakeIn extends Command {
   public double ySpeed;
   intakeSubsystem intake;
+
   public intakeIn(intakeSubsystem intake, double ySpeed) {
     this.ySpeed = ySpeed;
     this.intake = intake;
@@ -17,7 +18,8 @@ public class intakeIn extends Command {
   }
 
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   @Override
   public void execute() {
