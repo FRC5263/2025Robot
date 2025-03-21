@@ -17,6 +17,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 //import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import frc.robot.auton.autonBad;
+import frc.robot.auton.playAuton;
+import frc.robot.auton.recordAuton;
 
 public class RobotContainer {
 
@@ -28,8 +30,8 @@ public class RobotContainer {
 
   private final climberSubsystem climber = new climberSubsystem();
 
-  private final autonBad m_auton = new autonBad(m_MecDrive);
-  // private final recordAuton m_record = new recordAuton();
+  private final autonBad m_autonBad = new autonBad(m_MecDrive);
+  private final playAuton m_auton = new playAuton(m_MecDrive);
 
   private final CommandJoystick stick3 = new CommandJoystick(2);
   private final CommandJoystick stick1 = new CommandJoystick(0);
@@ -44,12 +46,12 @@ public class RobotContainer {
   }
 
   private void configureBindings() {
-    stick3.button(1).whileTrue(new intakeOut(intakeMotor, 1.0));
-    stick3.button(2).whileTrue(new intakeIn(intakeMotor, -1.0));
+    stick1.button(1).whileTrue(new intakeOut(intakeMotor, 1.0));
+    stick1.button(2).whileTrue(new intakeIn(intakeMotor, -1.0));
 
-    stick3.button(3).whileTrue(new climberCommand(climber, 1));
+    stick1.button(3).whileTrue(new climberCommand(climber, 1));
 
-    // stick1.button(4).whileTrue(m_record);
+    stick1.button(4).whileTrue(new recordAuton(m_MecDrive));
   }
 
   public Command getAutonomousCommand() {

@@ -54,13 +54,13 @@ public class mecDrive extends SubsystemBase{
         SmartDashboard.putNumber("Strafe(xSpeed)", getXspeed());
         SmartDashboard.putNumber("Rotation(zRotation)", getZspeed());
     }
-    public static double getYspeed(){
+    public double getYspeed(){
         return speedY;
     }
-    public static double getXspeed(){
+    public double getXspeed(){
         return speedX;
     }
-    public static double getZspeed(){
+    public double getZspeed(){
         return speedZ;
     }
 }

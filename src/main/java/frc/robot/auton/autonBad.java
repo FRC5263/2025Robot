@@ -28,7 +28,7 @@ public class autonBad extends Command {
 
   @Override
   public void execute() {
-    mecDrive.drive(1, 0, 0);
+    mecDrive.drive(0.5, 0, 0);
   }
 
   @Override
@@ -37,6 +37,6 @@ public class autonBad extends Command {
 
   @Override
   public boolean isFinished() {
-    return m_timer.get() >= 2;
+    return m_timer.get() >= 1.5;
   }
 }
