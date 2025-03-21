@@ -23,7 +23,7 @@ public class driveCommand extends Command {
   private DoubleSupplier y;
   private DoubleSupplier z;
 
-  public driveCommand(mecDrive driveSubsystem, DoubleSupplier x, DoubleSupplier y, DoubleSupplier z, boolean run) {
+  public driveCommand(mecDrive driveSubsystem, DoubleSupplier x, DoubleSupplier y, DoubleSupplier z) {
     m_drive = driveSubsystem;
     this.z = z;
     this.y = y;
