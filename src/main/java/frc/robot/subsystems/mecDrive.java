@@ -45,8 +45,11 @@ public class mecDrive extends SubsystemBase{
         public static void drive(double ySpeed, double xSpeed, double zRotation) {
             mecanumDrive.driveCartesian(ySpeed, xSpeed, zRotation);
             speedY = ySpeed;
+            System.out.println(ySpeed);
             speedX = xSpeed;
+            System.out.println(xSpeed);
             speedZ = zRotation;
+            System.out.println(zRotation);
     }
     @Override
     public void periodic(){
