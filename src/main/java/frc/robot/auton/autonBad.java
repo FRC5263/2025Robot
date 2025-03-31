@@ -37,6 +37,6 @@ public class autonBad extends Command {
 
   @Override
   public boolean isFinished() {
-    return m_timer.get() >= 1.5;
+    return m_timer.get() >= 0.75;
   }
 }

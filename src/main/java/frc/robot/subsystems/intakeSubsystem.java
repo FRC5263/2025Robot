@@ -6,32 +6,23 @@ package frc.robot.subsystems;
 
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
-import frc.robot.Constants;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class intakeSubsystem extends SubsystemBase {
-  private boolean intakeOn = false;
-  private SparkMax intake;
-
-  public intakeSubsystem() {
-    intake = new SparkMax(Constants.intake1_ID, MotorType.kBrushless);
-  }
-
-  public void ySpeed(double power) {
-    intake.set(power);
+  /** Creates a new intakeSubsystem. */
+  private Boolean intakeOn = false;
+  private static SparkMax intakeMax;
+    public intakeSubsystem() {
+      intakeMax = new SparkMax(Constants.intake1_ID, MotorType.kBrushless);
+    }
+  
+    public static void go(double ySpeed){
+      intakeMax.set(ySpeed);
   }
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("Intake", intake.get());
-  }
-
-  public void toggleIntake() {
-    intakeOn = !intakeOn;
-  }
-
-  public boolean getIntakeOn() {
-    return intakeOn;
   }
 }

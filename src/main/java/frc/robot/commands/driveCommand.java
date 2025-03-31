@@ -6,7 +6,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.mecDrive;
-import edu.wpi.first.wpilibj.Joystick;
 import java.util.function.DoubleSupplier;
 
 /* Hello all continuous years in FRC5263
@@ -17,7 +16,6 @@ public class driveCommand extends Command {
   public void initialize() {
   }
 
-  Joystick stick1 = new Joystick(0);
   private mecDrive m_drive;
   private DoubleSupplier x;
   private DoubleSupplier y;

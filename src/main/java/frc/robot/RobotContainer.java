@@ -6,8 +6,7 @@ package frc.robot;
 
 //import frc.robot.auton.recordAuton;
 import frc.robot.commands.driveCommand;
-import frc.robot.commands.intakeIn;
-import frc.robot.commands.intakeOut;
+import frc.robot.commands.intakeCommand;
 import frc.robot.commands.climberCommand;
 import frc.robot.subsystems.climberSubsystem;
 import frc.robot.subsystems.intakeSubsystem;
@@ -26,9 +25,9 @@ public class RobotContainer {
 
   private final mecDrive m_MecDrive = new mecDrive();
 
-  private final intakeSubsystem intakeMotor = new intakeSubsystem();
 
   private final climberSubsystem climber = new climberSubsystem();
+  private final intakeSubsystem intake = new intakeSubsystem();
 
   private final autonBad m_autonBad = new autonBad(m_MecDrive);
   private final playAuton m_auton = new playAuton(m_MecDrive);
@@ -42,20 +41,24 @@ public class RobotContainer {
     m_MecDrive.setDefaultCommand(new driveCommand(m_MecDrive, () -> Math.pow(stick1.getRawAxis(1) * .9, 3),
         () -> -Math.pow(stick1.getRawAxis(0) * .9, 3), () -> -Math.pow((stick2.getRawAxis(0) * .9), 3)));
 
+    //climber.setDefaultCommand(new climberCommand(climber, () -> Math.pow((stick3.getY() * .3), 3)));
+    intake.setDefaultCommand(new intakeCommand(intake, () -> -Math.pow((stick3.getY() * .5), 3)));
+
     configureBindings();
   }
 
   private void configureBindings() {
-    stick1.button(1).whileTrue(new intakeOut(intakeMotor, 1.0));
-    stick1.button(2).whileTrue(new intakeIn(intakeMotor, -1.0));
+    //stick3.button(2).whileTrue(new intakeOut(intakeMotor, 0.3));
+    //stick3.button(3).whileTrue(new intakeIn(intakeMotor, -1));
 
-    stick1.button(3).whileTrue(new climberCommand(climber, 1));
+    
+    stick3.button(6).whileTrue(new climberCommand(climber, -0.1));
 
-    stick1.button(4).whileTrue(new recordAuton(m_MecDrive));
+    //stick1.button(4).whileTrue(new recordAuton(m_MecDrive));
   }
 
   public Command getAutonomousCommand() {
-    return m_auton;
+    return m_autonBad;
 
     // return Commands.run(()->mecDrive.drive(1, 0,
     // 0)).andThen(Commands.waitSeconds(2.5).andThen(()->mecDrive.drive(0, 0, 0)));

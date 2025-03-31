@@ -22,7 +22,9 @@ public class climberCommand extends Command {
 
   @Override
   public void execute() {
-    climber.climb(1);
+
+    //0.5 
+    climber.climb(0.5);
     climber.toggleClimber();
   }
 
