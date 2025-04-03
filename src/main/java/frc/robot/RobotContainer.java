@@ -11,7 +11,6 @@ import frc.robot.commands.climberCommand;
 import frc.robot.subsystems.climberSubsystem;
 import frc.robot.subsystems.intakeSubsystem;
 import frc.robot.subsystems.mecDrive;
-import frc.robot.subsystems.clawSubsystem;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
