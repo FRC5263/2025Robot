@@ -7,21 +7,25 @@ package frc.robot.subsystems;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class intakeSubsystem extends SubsystemBase {
-  /** Creates a new intakeSubsystem. */
-  private static SparkMax intakeMax;
-    public intakeSubsystem() {
-      intakeMax = new SparkMax(Constants.intake1_ID, MotorType.kBrushless);
-    }
-  
-    public static void go(double ySpeed){
-      intakeMax.set(ySpeed);
+public class climberSubsystem extends SubsystemBase {
+  private SparkMax climber;
+
+  public climberSubsystem() {
+    climber = new SparkMax(Constants.climberID, MotorType.kBrushless);
+  }
+
+  public void climb(double power) {
+    climber.set(power);
   }
 
   @Override
   public void periodic() {
+    SmartDashboard.putNumber("Climber", climber.get());
   }
+
+
 }
