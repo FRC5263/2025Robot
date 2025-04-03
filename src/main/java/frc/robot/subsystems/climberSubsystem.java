@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class climberSubsystem extends SubsystemBase {
-  private boolean ClimberOn = false;
   private SparkMax climber;
 
   public climberSubsystem() {
@@ -28,11 +27,5 @@ public class climberSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Climber", climber.get());
   }
 
-  public void toggleClimber() {
-    ClimberOn = !ClimberOn;
-  }
 
-  public boolean getClimberOn() {
-    return ClimberOn;
-  }
 }

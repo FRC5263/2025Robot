@@ -12,7 +12,6 @@ import frc.robot.Constants;
 
 public class intakeSubsystem extends SubsystemBase {
   /** Creates a new intakeSubsystem. */
-  private Boolean intakeOn = false;
   private static SparkMax intakeMax;
     public intakeSubsystem() {
       intakeMax = new SparkMax(Constants.intake1_ID, MotorType.kBrushless);

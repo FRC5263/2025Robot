@@ -25,7 +25,6 @@ public class climberCommand extends Command {
 
     //0.5 
     climber.climb(0.5);
-    climber.toggleClimber();
   }
 
   @Override

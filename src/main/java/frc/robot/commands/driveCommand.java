@@ -21,7 +21,7 @@ public class driveCommand extends Command {
   private DoubleSupplier y;
   private DoubleSupplier z;
 
-  public driveCommand(mecDrive driveSubsystem, DoubleSupplier x, DoubleSupplier y, DoubleSupplier z) {
+  public driveCommand(mecDrive driveSubsystem, DoubleSupplier y, DoubleSupplier x, DoubleSupplier z) {
     m_drive = driveSubsystem;
     this.z = z;
     this.y = y;
@@ -32,7 +32,7 @@ public class driveCommand extends Command {
 
   @Override
   public void execute() {
-    mecDrive.drive(-x.getAsDouble(), -y.getAsDouble(), -z.getAsDouble());
+    mecDrive.drive(-y.getAsDouble(), -x.getAsDouble(), -z.getAsDouble());
   }
 
   @Override

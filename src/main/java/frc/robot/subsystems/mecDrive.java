@@ -34,8 +34,6 @@ public class mecDrive extends SubsystemBase{
             System.out.print("Front left motor initalized with ID 5\n");
             System.out.print("Motor configuration set\n");
             
-            // TODO: Don't forget to re-reverse the controlers in the hardware client
-
             // Init
             mecanumDrive = new MecanumDrive(frontLeft, rearLeft, frontRight, rearRight);
             System.out.print("Drive cartesian initalized\n");
